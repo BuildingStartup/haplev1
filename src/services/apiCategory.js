@@ -1,0 +1,66 @@
+import supabase from "./supabase";
+
+export async function getAllCategories(){
+    const {data: categories, error} = await supabase
+    .from("categories")
+    .select("*");
+    
+    if(error){
+        console.log(error);
+        throw new Error(error);
+    }
+
+    return categories;
+};
+
+export async function getCategoryBySlug(slug){
+    const {data: category, error} = await supabase
+    .from("categories")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+    
+    if(error){
+        console.log(error);
+        throw new Error(error);
+    }
+
+    return category;
+};
+
+
+export async function getSellerCategoryById(category_id){
+    const {data: category, error} = await supabase
+    .from("categories")
+    .select("*")
+    .eq("id", category_id)
+    .single();
+
+
+    if(error){
+        console.log(error);
+        throw new Error(error);
+    }
+
+    return category;
+}
+
+export async function getCategoryByCatalogAndSlug(catalog, slug) {
+    const { data: category, error } = await supabase
+        .from("categories")
+        .select("*")
+        .eq("catalog", catalog)
+        .eq("slug", slug)
+        .single();
+    
+    if (error) {
+        console.log(error);
+        throw new Error(error.message);
+    }
+    
+    return category;
+}
+
+
+
+

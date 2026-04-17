@@ -7,18 +7,20 @@ body {
   font-family: "Poppins", sans-serif;
   /* font-family: "Inter", sans-serif; */
   font-style: normal;
-  font-size: 13px;
+  font-size: 12px;
   /* bg-[#F8FAFC] */
   /* Helping All People Locate Entrepreneurs */
 }
 
 @theme {
-  --color-primary: #3b82f6;
-  --color-primary-light: #60a5fa;
+  --color-primary: #0050CB;
+  --color-primary-dark: #0F172A;
+  --color-primary-light: #0066FF;
   --color-primary-lighter: #93c5fd;
   --color-primary-lightest: #bfdbfe;
   --color-accent: #f1f5f9;
-  --color-neutral: ;
+  --color-neutral-100: #C1C3CA;
+  --color-neutral-200: #F3F4F5;
   --color-secondary: #25d366;
   --color-secondary-darker: #075E54;
   --color-secondary-icon: #25D366;

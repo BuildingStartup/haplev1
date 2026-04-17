@@ -19,8 +19,10 @@ body {
   --color-primary-lighter: #93c5fd;
   --color-primary-lightest: #bfdbfe;
   --color-accent: #f1f5f9;
-  --color-neutral-100: #C1C3CA;
+  --color-accent-light: #F8F9FA;
+  --color-neutral-100: #424656;
   --color-neutral-200: #F3F4F5;
+  --color-neutral-300: #64748B;
   --color-secondary: #25d366;
   --color-secondary-darker: #075E54;
   --color-secondary-icon: #25D366;

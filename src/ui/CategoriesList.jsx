@@ -38,11 +38,11 @@ function CategoriesList() {
     ]
 
     return (
-        <div className="space-y-3">
+        <div className="space-y-3 lg:space-y-9">
             <h2 className="text-xl font-medium lg:text-2xl">Browse by Categories</h2>
             <div className="flex justify-between gap-2 lg:gap-4 overflow-x-hidden">
                 {category.map((cat, index) => (
-                    <div key={index} className="flex items-center py-1 px-8 rounded-xl justify-center bg-neutral-200 lg:p-6 flex-1">
+                    <div key={index} className="flex items-center py-1 px-8 rounded-xl justify-center bg-accent lg:p-6 flex-1">
                         <div className="flex flex-col items-center gap-2">
                             <div className="bg-white w-8 h-8 lg:w-12 lg:h-12 flex items-center justify-center rounded-full">
                                 <span className="text-primary text-base lg:text-lg">

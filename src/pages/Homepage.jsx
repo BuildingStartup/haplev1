@@ -19,7 +19,7 @@ export default function Homepage(){
                 <TopCategories />
                 <VerifiedSellers />                
             </main>
-            <div className="bg-primary-light p-10 lg:p-20">
+            <div className="bg-primary-light p-3 lg:p-20">
                 <Footer />
             </div>
         </div>

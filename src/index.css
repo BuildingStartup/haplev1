@@ -1,11 +1,11 @@
 @import "tailwindcss";
+@import "@fontsource/manrope";
 
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  /* font-family: "Inter", sans-serif; */
+  font-family: "Manrope", sans-serif;
   font-style: normal;
   font-size: 12px;
   /* bg-[#F8FAFC] */
@@ -23,10 +23,8 @@ body {
   --color-neutral-100: #424656;
   --color-neutral-200: #F3F4F5;
   --color-neutral-300: #64748B;
-  --color-secondary: #25d366;
-  --color-secondary-darker: #075E54;
-  --color-secondary-icon: #25D366;
-  --color-secondary-light: #128C7E;
+  --color-neutral-400: #C1C3CA;
+  --color-secondary-100: #5DFD8A;
 }
 
 @layer utilities {

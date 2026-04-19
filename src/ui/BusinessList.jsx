@@ -33,7 +33,7 @@ function BusinessList() {
     ]
 
     return (
-        <div className="grid grid-flow-col auto-cols-[180px] lg:auto-cols-[389px] gap-4 no-scrollbar overflow-x-auto">
+        <div className="grid grid-flow-col auto-cols-[240px] lg:auto-cols-[389px] gap-4 no-scrollbar overflow-x-auto">
                 {sellers.map((seller, index) => (
                     <div key={index} className="rounded-xl lg:rounded-2xl overflow-hidden bg-white ">
                         <div className="relative h-35 lg:h-[219.98px]">

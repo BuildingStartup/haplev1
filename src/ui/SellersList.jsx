@@ -38,11 +38,11 @@ function SellersList() {
         },
     ]
     return (
-        <div className="grid grid-flow-col auto-cols-[170px] lg:auto-cols-[256px] gap-9 overflow-x-hidden">
+        <div className="grid grid-flow-col auto-cols-[180px] lg:auto-cols-[256px] gap-5 lg:gap-9 no-scrollbar overflow-x-auto">
                 {sellers.map((seller, index) => (
                     <div key={index} className="rounded-2xl bg-white flex  flex-col items-center gap-3 p-6 text-center">
-                        <picture>
-                            <img src={`../${seller.image}.jpg`} alt={seller.name} />
+                        <picture className="bg-accent w-20 h-20 flex items-center justify-center overflow-hidden p-1 rounded-full">
+                            <img src={`../${seller.image}.jpg`} alt={seller.name} className="w-full h-full" />
                         </picture>
                         <div>
                             <div className="flex items-center justify-center gap-2">

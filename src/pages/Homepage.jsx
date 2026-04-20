@@ -9,9 +9,9 @@ import VerifiedSellers from "../ui/VerifiedSellers";
 export default function Homepage(){
     return (
         <div className="space-y-6 lg:space-y-12">
-            <div className="bg-white px-4 py-2 lg:px-12 lg:py-3">
+            <nav className="bg-white px-4 py-2 lg:px-12 lg:py-3">
                 <Navbar />
-            </div>
+            </nav>
             <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">
                 <Hero />
                 <CategoriesList />
@@ -19,9 +19,9 @@ export default function Homepage(){
                 <TopCategories />
                 <VerifiedSellers />                
             </main>
-            <div className="bg-primary-light p-3 lg:p-20">
+            <footer className="bg-primary-light p-3 lg:p-20">
                 <Footer />
-            </div>
+            </footer>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { MdDelete } from "react-icons/md";
+import { GoTrash } from "react-icons/go";
 import { useState } from "react";
 import SpinnerMini from "../../ui/SpinnerMini"
 
@@ -21,7 +21,7 @@ export default function ViewProducts({products, handleDelete, isDeleting}){
 
     return (
         <>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 p-5 place-items-center">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 lg:gap-4 p-2 lg:p-5 place-items-center">
                 {products.map((prod) => {
                   const isProductDeleting = isDeleting && deletingProductId === prod.id;
 
@@ -32,13 +32,13 @@ export default function ViewProducts({products, handleDelete, isDeleting}){
                   >
                     <button
                       onClick={() => handleDeleteClick(prod.id)}
-                      className="absolute top-2 right-2 bg-white rounded-full p-1 transition cursor-pointer z-10"
+                      className="absolute top-3 lg:top-5 right-3 lg:right-5 cursor-pointer z-10"
                       disabled={isDeleting}
                     >
-                      <MdDelete className="text-red-500" />
+                      <GoTrash className="text-secondary-300 text-base lg:text-lg" />
                     </button>
 
-                    <div className="relative h-35 lg:h-[219.98px]">
+                    <div className="relative h-35 lg:h-[218.98px]">
                       <img
                         src={`../${prod.image_url}.jpg`}
                         alt={prod.name}
@@ -57,11 +57,8 @@ export default function ViewProducts({products, handleDelete, isDeleting}){
                     </div>
 
                     <div className="p-2 space-y-1 lg:p-6 lg:space-y-2">
-                            <div className="flex justify-between items-center">
-                                <h3 className="text-sm lg:text-lg font-medium">{prod.name}</h3>
-                                <img src="../checkIcon.svg" alt="verified"/>
-                            </div>
-                            <p className="lg:text-base text-neutral-100">{prod.caption}</p>                            
+                            <h3 className="text-sm lg:text-lg font-medium">{prod.name}</h3>
+                            <p className="lg:text-sm text-neutral-100">{prod.caption}</p>                            
                         </div>
                   </div>
                   );

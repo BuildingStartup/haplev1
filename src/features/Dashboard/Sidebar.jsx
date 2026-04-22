@@ -4,7 +4,7 @@ import { GoVerified, GoSignOut } from "react-icons/go";
 import { BsCart2 } from "react-icons/bs";
 function Sidebar() {
     return (
-        <aside className="flex-1 bg-primary-light px-3 py-6 flex flex-col gap-7 h-screen">
+        <aside className=" hidden flex-1 bg-primary-light px-3 py-6 lg:flex flex-col gap-7 h-screen">
             <picture className="px-3">
                 <img src="../logo-white.svg" alt="logo" className="" />
             </picture>

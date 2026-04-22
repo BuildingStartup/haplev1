@@ -10,7 +10,7 @@ export default function AddProductButton({products, showForm, remaining, handleA
             item{remaining !== 1 ? "s" : ""}
           </p>
           <button
-            className="bg-primary text-white p-2 text-sm rounded cursor-pointer"
+            className="bg-primary text-white p-1.5 lg:p-2.5 text-sm rounded cursor-pointer"
             onClick={handleAddItem}            
           >
             Add Item ({products.length}/4)

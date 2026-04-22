@@ -3,7 +3,7 @@ function Navbar() {
         <div className="flex justify-between items-center">
 
             <picture className="w-13 lg:w-18">
-                <img src="../Vector.svg" alt="logo" className="w-full" />
+                <img src="../logo.svg" alt="logo" className="w-full" />
             </picture>
 
             <div className="flex gap-2 lg:gap-3.5">

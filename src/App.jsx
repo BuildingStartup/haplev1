@@ -1,10 +1,9 @@
-function App() {
+// import { Router, Route, useLocation, BrowserRouter } from "react-router-dom";
+import Login from "./Pages/Login.jsx";
+export default function App() {
   return (
-    <div>
-      Hello world
-    </div>
-  )
+    <>
+      <Login />
+    </>
+  );
 }
-
-export default App
-

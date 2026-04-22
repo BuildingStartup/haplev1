@@ -1,8 +1,7 @@
 import { GoArrowLeft } from "react-icons/go";
 import { BsChat } from "react-icons/bs";
-import Footer from "../ui/Footer"
-import Navbar from "../ui/Navbar"
-import PortfolioCard from "../ui/PortfolioCard";
+import PortfolioCard from "../../ui/PortfolioCard";
+import MainLayout from "../../layouts/MainLayout";
 
 function SellerProfile() {
     const portfolio = [
@@ -33,11 +32,7 @@ function SellerProfile() {
         },
     ]
     return (
-        <div>
-            <nav className="bg-white px-4 py-2 lg:px-12 lg:py-3">
-                <Navbar />
-            </nav>
-
+        <MainLayout>
             <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3 mb-10">
                 <div className="flex items-center gap-1 text-neutral-500">
                     <GoArrowLeft />
@@ -77,11 +72,7 @@ function SellerProfile() {
                 </div>
 
             </main>
-
-            <footer className="bg-primary-light p-4 lg:p-20">
-                <Footer />
-            </footer>
-        </div>
+        </MainLayout>
     )
 }
 

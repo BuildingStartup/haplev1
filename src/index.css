@@ -16,7 +16,7 @@ body {
   --color-primary: #0050CB;
   --color-primary-dark: #0F172A;
   --color-primary-light: #0066FF;
-  --color-primary-lighter: #93c5fd;
+  --color-primary-lighter: #DAE1FF;
   --color-primary-lightest: #bfdbfe;
   --color-accent: #f1f5f9;
   --color-accent-light: #F8F9FA;
@@ -28,6 +28,9 @@ body {
   --color-stroke-100: #191C1D;
   --color-secondary-100: #5DFD8A;
   --color-secondary-200: #22A747;
+  --color-secondary-300: #BA1A1A;
+
+  --color-dark-100: #2f2f2f;
 }
 
 @layer utilities {

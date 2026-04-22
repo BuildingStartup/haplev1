@@ -21,7 +21,7 @@ export default function Login() {
   };
   console.log(fieldData, errors);
   return (
-    <section className="min-h-screen relative">
+    <section className="min-h-screen">
       <div className="flex items-end bg-white pt-5 px-6 justify-between text-base">
         <img src="./Logo.png" alt="Haple Logo" className="w-17 object-cover" />
         <p className="text-[#0050CB]">Help</p>
@@ -29,7 +29,7 @@ export default function Login() {
 
       <main
         className=" mx-4 my-5 sm:grid sm:grid-cols-[1fr_1.1fr] sm:bg-white sm:mx-auto sm:w-11/12 lg:w-8/12 sm:rounded-2xl sm:shadow-md
-      "
+        "
       >
         {/* Login Image */}
         <div className="hidden sm:block sm:max-h-[550px] relative">
@@ -100,9 +100,14 @@ export default function Login() {
               errors={errors}
               type={showPassword ? "text" : "password"}
             />
+
+            <Link className="text-[#0066FF] font-semibold" to="/password-reset">
+              Forgot Password
+            </Link>
+
             <button
               type="submit"
-              className="bg-[#0066FF] text-white text-center w-full py-3 rounded-lg text-lg"
+              className="bg-[#0066FF] text-white text-center w-full py-3 rounded-2xl text-lg"
             >
               Log In
             </button>

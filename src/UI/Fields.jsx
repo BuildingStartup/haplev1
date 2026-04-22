@@ -1,5 +1,6 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { VscError } from "react-icons/vsc";
+
 export default function Fields({
   labelName,
   forTag,
@@ -14,10 +15,11 @@ export default function Fields({
   showPassword,
   setShowPassword,
   autocomplete,
+  //   icon,
 }) {
   return (
     <div className="flex flex-col gap-2 relative">
-      <label htmlFor={forTag} className="text-gray-700 font-medium">
+      <label htmlFor={forTag} className="text-[#4D4D4D] font-medium">
         {labelName}
       </label>
       <div className="relative">
@@ -37,7 +39,7 @@ export default function Fields({
           required
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full px-3 py-2 ring ring-gray-300 rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${
+          className={`w-full p-3 ring ring-[#8A8A8A] rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${
             prefix ? "pl-14" : ""
           }`}
         />
@@ -52,7 +54,7 @@ export default function Fields({
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-11 text-gray-400"
+          className="absolute right-3 top-12 text-gray-400"
         >
           {showPassword ? <FaEye /> : <FaEyeSlash />}
         </button>

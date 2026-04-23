@@ -3,6 +3,7 @@ import Login from "./Pages/Login.jsx";
 import ResetPassword from "./Pages/ResetPassword.jsx";
 import ChangePassword from "./Pages/ChangePassword.jsx";
 import SignUp from "./Pages/SignUp.jsx";
+import Success from "./UI/Success.jsx";
 export default function App() {
   return (
     <BrowserRouter>
@@ -11,6 +12,7 @@ export default function App() {
         <Route path="/password-reset" element={<ResetPassword />} />
         <Route path="/new-password" element={<ChangePassword />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/success" element={<Success />} />
       </Routes>
     </BrowserRouter>
   );

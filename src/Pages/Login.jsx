@@ -71,43 +71,48 @@ export default function Login() {
             </p>
           </div>
           {/* Login Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
-            <Fields
-              forTag="email"
-              labelName="Email Address"
-              validation={{
-                value: /^[^\s@]+@[^\s@]+\.(com)$/i,
-                message: "Enter a valid email",
-              }}
-              placeholder="joel@gmail.com"
-              type="email"
-              errorMessage="Email is required"
-              errors={errors}
-              register={register}
-            />
-            <Fields
-              labelName="Password"
-              forTag="password"
-              errorMessage="Password is required"
-              validation={{
-                value: /^(?=.*[!@#$%^&*]).{8,}$/, // at least 8 chars, 1 symbol
-                message:
-                  "Password must be at least 8 characters with at least 1 symbol",
-              }}
-              setShowPassword={setShowPassword}
-              showPassword={showPassword}
-              register={register}
-              errors={errors}
-              type={showPassword ? "text" : "password"}
-            />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="space-y-4 mt-4 mb-1">
+              <Fields
+                forTag="email"
+                labelName="Email Address"
+                validation={{
+                  value: /^[^\s@]+@[^\s@]+\.(com)$/i,
+                  message: "Enter a valid email",
+                }}
+                placeholder="joel@gmail.com"
+                type="email"
+                errorMessage="Email is required"
+                errors={errors}
+                register={register}
+              />
+              <Fields
+                labelName="Password"
+                forTag="password"
+                errorMessage="Password is required"
+                validation={{
+                  value: /^(?=.*[!@#$%^&*]).{8,}$/, // at least 8 chars, 1 symbol
+                  message:
+                    "Password must be at least 8 characters with at least 1 symbol",
+                }}
+                setShowPassword={setShowPassword}
+                showPassword={showPassword}
+                register={register}
+                errors={errors}
+                type={showPassword ? "text" : "password"}
+              />
+            </div>
 
-            <Link className="text-[#0066FF] font-semibold" to="/password-reset">
+            <Link
+              className="text-[#0066FF] font-semibold "
+              to="/password-reset"
+            >
               Forgot Password
             </Link>
 
             <button
               type="submit"
-              className="bg-[#0066FF] text-white text-center w-full py-3 rounded-2xl text-lg"
+              className="bg-[#0066FF] text-white text-center w-full py-3 rounded-2xl text-2xl mb-3 mt-4 font-semibold"
             >
               Log In
             </button>

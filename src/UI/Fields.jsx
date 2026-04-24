@@ -1,0 +1,64 @@
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { VscError } from "react-icons/vsc";
+
+export default function Fields({
+  labelName,
+  forTag,
+  errorMessage,
+  placeholder,
+  register,
+  errors,
+  type,
+  validation,
+  onChange,
+  prefix,
+  showPassword,
+  setShowPassword,
+  autocomplete,
+  //   icon,
+}) {
+  return (
+    <div className="flex flex-col gap-2 relative">
+      <label htmlFor={forTag} className="text-[#4D4D4D] font-medium">
+        {labelName}
+      </label>
+      <div className="relative">
+        {prefix && (
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+            {prefix}
+          </span>
+        )}
+        <input
+          id={forTag}
+          type={type}
+          autoComplete={autocomplete}
+          {...register(forTag, {
+            required: errorMessage,
+            pattern: validation,
+          })}
+          required
+          onChange={onChange}
+          placeholder={placeholder}
+          className={`w-full p-3 ring ring-[#8A8A8A] rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${
+            prefix ? "pl-14" : ""
+          }`}
+        />
+      </div>
+      {errors[forTag] && (
+        <div className="text-red-600 text-sm bg-red-50 p-2 rounded flex items-center gap-1">
+          <VscError />
+          <span>{errors[forTag].message}</span>
+        </div>
+      )}
+      {forTag === "password" && (
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className="absolute right-3 top-12 text-gray-400"
+        >
+          {showPassword ? <FaEye /> : <FaEyeSlash />}
+        </button>
+      )}
+    </div>
+  );
+}

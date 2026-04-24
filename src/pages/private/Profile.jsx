@@ -1,228 +1,123 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { HiOutlineCamera } from "react-icons/hi2";
+import {useAuth} from "../../context/AuthContext"
 import DashLayout from "../../layouts/DashLayout"
 import AddProductButton from "../../features/Dashboard/AddProductButton";
 import SellerContact from "../../features/Dashboard/SellerContact";
 import ViewProducts from "../../features/Dashboard/ViewProducts";
 import AddProductForm from "../../features/Dashboard/AddProductForm";
+import useSeller from "../../features/profiles/useSeller";
+import useSellerCategory from "../../features/categories/useSellerCategory";
+import useSellerImages from "../../features/profiles/useSellerImages";
+import useSignOut from "../../features/authentication/useSignOut";
+import SplashScreen from "../../ui/SplashScreen";
 
 function Profile() {
-    // dummy object
-    const images = [
-        // {
-        //     name: "Luxe Lashes By Sarah",
-        //     caption: "lorem ipsum dure skadf gkdahs hgitns ghisd nsdkfd shsia nshadn ahdna hhdjja",
-        //     image_url: "luxelushes"
-        // },        
-        // {
-        //     name: "Luxe Lashes By Sarah",
-        //     caption: "lorem ipsum dure skadf gkdahs hgitns ghisd nsdkfd shsia nshadn ahdna hhdjja",
-        //     image_url: "luxelushes"
-        // },        
-        // {
-        //     name: "Luxe Lashes By Sarah",
-        //     caption: "lorem ipsum dure skadf gkdahs hgitns ghisd nsdkfd shsia nshadn ahdna hhdjja",
-        //     image_url: "luxelushes"
-        // },        
-                
-    ]
+    const { user } = useAuth();
+  const { fetchSellerById, seller: sellerInfo, loading, error } = useSeller();
+  const {
+    fetchSellerCategory,
+    loading: categoryLoading,
+    error: categoryError,
+    category,
+  } = useSellerCategory();
+  const {
+      isUploading,
+      isDeleting,
+      handleUploadImage,
+      handleGetImages,
+      handleDeleteImage,
+      images,
+      loading: imageLoading,
+      error: imageError,
+  } = useSellerImages();
+  const { loading: signOutLoading, handleSignOut } = useSignOut();
 
-    const sellerInfo = 
-        {
-            campus: "Bowen University",
-            whatsapp_number: "+2347015482220"
-        }
-    
+  useEffect(() => {
+    if (user?.id) fetchSellerById(user.id);
+  }, [user]);
 
-        const [newProducts, setNewProducts] = useState([]);
-        const [showForm, setShowForm] = useState(false);
-        const [openOptions, setOpenOptions] = useState(false);
-        const [errors, setErrors] = useState({});
-        const [isSubmittingProduct, setIsSubmittingProduct] = useState(false);
-        const selectedProductsRef = useRef([]);
-        const [uploadProgress, setUploadProgress] = useState([]);
-        // const isProductUploadBusy = isSubmittingProduct || isUploading;
-        const isProductUploadBusy = false;
-      
+  useEffect(() => {
+    if (sellerInfo?.category_id) fetchSellerCategory(sellerInfo.category_id);
+  }, [sellerInfo?.category_id]);
 
-    const handleSelectImages = (e) => {
-        const files = Array.from(e.target.files || []);
-        if (!files.length) return;
-    
-        const MAX_FILE_SIZE = 11 * 1024 * 1024;
-        const remainingSlots = Math.max(0, 4 - images.length - newProducts.length);
-        const selectedFiles = files.slice(0, remainingSlots);
-    
-        const validItems = [];
-        let hasLargeFile = false;
-    
-        selectedFiles.forEach((file) => {
-          if (file.size > MAX_FILE_SIZE) {
-            hasLargeFile = true;
-            return;
-          }
-    
-          validItems.push({
-            file,
-            preview: URL.createObjectURL(file),
-            name: "",
-            caption: "",
-          });
-        });
-    
-        setNewProducts((prev) => [...prev, ...validItems]);
-        setErrors((prev) => {
-          const next = { ...prev };
-          delete next.items;
-          if (hasLargeFile) {
-            next.image_url = "Some files were skipped because they exceed 11MB.";
-          } else {
-            delete next.image_url;
-          }
-          return next;
-        });
-    
-        // Allow selecting the same file again after removing it.
-        e.target.value = "";
-      };
-    
-      const handleProductFieldChange = (index, field, value) => {
-        if (field === "caption") {
-          const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
-          if (wordCount > 15 && value !== "") return;
-        }
-    
-        setNewProducts((prev) =>
-          prev.map((item, i) => (i === index ? { ...item, [field]: value } : item))
-        );
-    
-        setErrors((prev) => {
-          const next = { ...prev };
-          if (next.items?.[index]?.[field]) {
-            next.items = { ...next.items, [index]: { ...next.items[index], [field]: undefined } };
-          }
-          return next;
-        });
-      };
-    
-      const handleRemoveSelectedImage = (index) => {
-        setNewProducts((prev) => {
-          const removedItem = prev[index];
-          if (removedItem?.preview) URL.revokeObjectURL(removedItem.preview);
-          return prev.filter((_, i) => i !== index);
-        });
-    
-        setErrors((prev) => {
-          const next = { ...prev };
-          if (next.items) {
-            const rebuilt = {};
-            Object.entries(next.items).forEach(([key, value]) => {
-              const currentIndex = Number(key);
-              if (currentIndex < index) rebuilt[currentIndex] = value;
-              if (currentIndex > index) rebuilt[currentIndex - 1] = value;
-            });
-            next.items = rebuilt;
-          }
-          return next;
-        });
-      };
+  useEffect(() => {
+    if (sellerInfo?.id) handleGetImages(sellerInfo.id);
+  }, [sellerInfo?.id]);
 
-      const validate = () => {
-        let temp = {};
-        if (!newProducts.length) {
-          temp.image_url = "Select at least one image";
-        }
-    
-        const itemErrors = {};
-        newProducts.forEach((item, index) => {
-          const perItemErrors = {};
-          if (!item.name.trim()) perItemErrors.name = "Listing name is required";
-          if (!item.caption.trim()) perItemErrors.caption = "Listing description is required";
-    
-          if (Object.keys(perItemErrors).length) {
-            itemErrors[index] = perItemErrors;
-          }
-        });
-    
-        if (Object.keys(itemErrors).length) {
-          temp.items = itemErrors;
-        }
-    
-        setErrors(temp);
-        return Object.keys(temp).length === 0;
-      };
-    
-      const compressImage = async (file) => {
-        const options = {
-          maxSizeMB: 2,
-          maxWidthOrHeight: 1600,
-          initialQuality: 0.9,
-          useWebWorker: true,
-        };
-        try {
-          const compressedFile = await imageCompression(file, options);
-          return compressedFile;
-        } catch(error){
-          console.error("Image compression error:", error);
-          return file; //fallback
-        }
-      }
-    
-      const submitProduct = async () => {
-        if (isProductUploadBusy) return;
-        if (!validate()) return;
-    
-        setIsSubmittingProduct(true);
-        setUploadProgress(new Array(newProducts.length).fill(0));
-        try {
-          const uploadItems = await Promise.all(
-            newProducts.map(async (item, index) => ({
-              imageFile: await compressImage(item.file),
-              position: images.length + index + 1,
-              name: item.name.trim(),
-              caption: item.caption.trim(),
-            }))
-          );
-    
-          await handleUploadImage(uploadItems, sellerInfo.id, (itemIndex, progress) => {
-            setUploadProgress((prev) => {
-              const updated = [...prev];
-              updated[itemIndex] = progress;
-              return updated;
-            });
-          });
-    
-          newProducts.forEach((item) => {
-            if (item.preview) URL.revokeObjectURL(item.preview);
-          });
-          setNewProducts([]);
-          setShowForm(false);
-          setErrors({});
-          setUploadProgress([]);
-        } finally {
-          setIsSubmittingProduct(false);
-        }
-      };
-    
-      const deleteProduct = async (imageId) => {
-        if (!imageId) return;
-        return handleDeleteImage(sellerInfo.id, imageId);
-      };
-    
-      const handleCancel = () => {
-        newProducts.forEach((item) => {
-          if (item.preview) URL.revokeObjectURL(item.preview);
-        });
-        setNewProducts([]);
-        setErrors({});
-        setShowForm(false);
-      };
+  // Products selected for upload (max 4 in total catalog)
+  const [newProducts, setNewProducts] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [errors, setErrors] = useState({});
+  const selectedProductsRef = useRef([]);
 
-    const handleAddItem = () => {
-        setShowForm(true);
-      };
-    const remaining = 4 - images.length;
+  
+
+  // keeps latest selected items
+  useEffect(() => {
+    selectedProductsRef.current = newProducts;
+  }, [newProducts]);
+
+  // revokes object URLs on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      selectedProductsRef.current.forEach((item) => {
+        if (item.preview) URL.revokeObjectURL(item.preview);
+      });
+    };
+  }, []);
+
+  
+
+  const deleteProduct = async (imageId) => {
+    if (!imageId) return;
+    return handleDeleteImage(sellerInfo.id, imageId);
+  };
+
+  const handleCancel = () => {
+    newProducts.forEach((item) => {
+      if (item.preview) URL.revokeObjectURL(item.preview);
+    });
+    setNewProducts([]);
+    setErrors({});
+    setShowForm(false);
+  };
+
+  const handleAddItem = () => {
+    setShowForm(true);
+  };
+
+  const handleLogout = () => {
+    handleSignOut();
+  };
+
+  if (loading || categoryLoading || imageLoading) return <SplashScreen />;
+  if (error || categoryError || imageError) return <NetworkError />;
+  if (!sellerInfo) return <p>No seller data found</p>;
+
+  const remaining = 4 - images.length;
+
+  // Share and Copy
+  const profilePath = `/seller/${sellerInfo?.username}`;
+  const profileUrl = `${window.location.origin}${profilePath}`;
+  // e.g. http://localhost:5173/seller/john
+  // or https://yourdomain.com/seller/john in production
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      await navigator.share({
+        title: sellerInfo.business_name,
+        text: `Check out ${sellerInfo.business_name} on Haple!`,
+        url: profileUrl,
+      });
+    }
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(profileUrl).then(() => alert("Link copied!"));
+  };
+
     return (
         <DashLayout>
             <main className="space-y-8 px-3 py-2 lg:px-12 lg:py-3 h-screen no-scrollbar overflow-y-auto">
@@ -262,22 +157,23 @@ function Profile() {
                     <ViewProducts
                         products={images}
                         isDeleting={false}
-                        // handleDelete={(imageId) => deleteProduct(imageId)}
+                        handleDelete={(imageId) => deleteProduct(imageId)}
                     />
 
                     {/* Add Product Form */}
                     <AddProductForm
                         showForm={showForm}
-                        handleSubmit={submitProduct}
-                        selectedProducts={newProducts}
+                        setShowForm={setShowForm}
+                        isUploading={isUploading}
                         errors={errors}
+                        setErrors={setErrors}
+                        images={images}
+                        handleUploadImage={handleUploadImage}
+                        newProducts={newProducts}
+                        setNewProducts={setNewProducts}
                         handleCancel={handleCancel}
-                        handleSelectImages={handleSelectImages}
-                        handleProductFieldChange={handleProductFieldChange}
-                        handleRemoveSelectedImage={handleRemoveSelectedImage}
+                        sellerInfo={sellerInfo}
                         remaining={Math.max(0, 4 - images.length - newProducts.length)}
-                        loading={isProductUploadBusy}
-                        uploadProgress={uploadProgress}
                     />
 
                     <AddProductButton

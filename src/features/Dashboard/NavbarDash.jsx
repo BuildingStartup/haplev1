@@ -1,5 +1,6 @@
 import { GoSearch } from "react-icons/go";
 import { IoNotificationsOutline, IoReorderThreeOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 function NavbarDash() {
     return (
@@ -7,7 +8,9 @@ function NavbarDash() {
 
             <div className="flex items-center gap-1 lg:hidden">
                 <IoReorderThreeOutline className="text-2xl" />
-                <img src="../logo.svg" alt="logo" className="w-15" />
+                <Link to="/">
+                    <img src="../logo.svg" alt="logo" className="w-15" />
+                </Link>
             </div>
            <div className="flex gap-2 lg:gap-4 items-center">
                 <div className="p-2">

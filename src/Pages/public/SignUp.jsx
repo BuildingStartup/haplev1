@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Fields from "../UI/Fields";
+import Fields from "../../UI/Fields";
 export default function SignUp() {
   const {
     register,
@@ -126,11 +126,10 @@ export default function SignUp() {
                   setValue("mode", "product");
                   setValue("categories", []);
                 }}
-                className={`flex-1 px-4 py-3 rounded-lg  cursor-pointer ${
-                  currentMode === "product"
+                className={`flex-1 px-4 py-3 rounded-lg  cursor-pointer ${currentMode === "product"
                     ? "bg-[#0066FF]/30 text-[#0066FF] font-medium ring-1 ring-[#0066FF]"
                     : "bg-white ring ring-gray-300 text-gray-600"
-                }`}
+                  }`}
               >
                 Products
               </button>
@@ -141,11 +140,10 @@ export default function SignUp() {
                   setValue("mode", "service");
                   setValue("categories", []);
                 }}
-                className={`flex-1 px-4 py-3 rounded-lg  cursor-pointer ${
-                  currentMode === "service"
+                className={`flex-1 px-4 py-3 rounded-lg  cursor-pointer ${currentMode === "service"
                     ? "bg-[#0066FF]/30 text-[#0066FF] font-medium ring-1 ring-[#0066FF]"
                     : "bg-white ring ring-gray-300 text-gray-600"
-                }`}
+                  }`}
               >
                 Services
               </button>
@@ -167,11 +165,10 @@ export default function SignUp() {
                       key={category.id}
                       type="button"
                       onClick={() => handleToggle(category.name)}
-                      className={`text-center text-gray-400 rounded-xl ring ring-gray-300 px-6 py-1 transition-all cursor-pointer ${
-                        selectedCategories.includes(category.id)
+                      className={`text-center text-gray-400 rounded-xl ring ring-gray-300 px-6 py-1 transition-all cursor-pointer ${selectedCategories.includes(category.id)
                           ? "bg-[#0066FF]/30 text-[#0066FF] font-medium ring-1 ring-[#0066FF]"
                           : "bg-white border-gray-200 text-gray-600"
-                      }`}
+                        }`}
                     >
                       {category.name}
                     </button>
@@ -216,7 +213,7 @@ export default function SignUp() {
               errors={errors}
               register={register}
               prefix="+234"
-              // onChange={(e) => handleWhatsAppChange(e.target.value)}
+            // onChange={(e) => handleWhatsAppChange(e.target.value)}
             />
 
             {/* PassWord */}
@@ -243,7 +240,7 @@ export default function SignUp() {
             <button
               type="submit"
               className="w-full font-medium text-white rounded-lg py-3 mb-1 cursor-pointer hover:shadow transition-all duration-200 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:bg-gray-300 bg-gradient-to-r from-[#0050CB] to-[#0066FF]"
-              // disabled={loading}
+            // disabled={loading}
             >
               <span>Create Seller Account</span>
             </button>

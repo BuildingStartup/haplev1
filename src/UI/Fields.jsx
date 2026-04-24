@@ -18,8 +18,8 @@ export default function Fields({
   //   icon,
 }) {
   return (
-    <div className="flex flex-col gap-2 relative">
-      <label htmlFor={forTag} className="text-[#4D4D4D] font-medium">
+    <div className="flex flex-col gap-1 relative">
+      <label htmlFor={forTag} className="text-neutral-600">
         {labelName}
       </label>
       <div className="relative">
@@ -39,13 +39,13 @@ export default function Fields({
           required
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full p-3 ring ring-[#8A8A8A] rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${
+          className={`w-full px-4 py-3.5 ring ring-neutral-500 rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${
             prefix ? "pl-14" : ""
           }`}
         />
       </div>
       {errors[forTag] && (
-        <div className="text-red-600 text-sm bg-red-50 p-2 rounded flex items-center gap-1">
+        <div className="text-secondary-300 text-sm bg-red-50 p-2 rounded flex items-center gap-1">
           <VscError />
           <span>{errors[forTag].message}</span>
         </div>
@@ -54,7 +54,7 @@ export default function Fields({
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-12 text-gray-400"
+          className="absolute right-3 top-10 text-gray-400"
         >
           {showPassword ? <FaEye /> : <FaEyeSlash />}
         </button>

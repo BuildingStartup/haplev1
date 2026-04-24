@@ -2,11 +2,14 @@ import { Link } from "react-router-dom"
 import Fields from "../../ui/Fields"
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import useLogin from "../authentication/useLogin";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 
-function LoginForm({onSubmit}) {
+function LoginForm() {
     
-  const [showPassword, setShowPassword] = useState(false);
+    const {loading, error: loginError, loginSeller} = useLogin();
+    const [showPassword, setShowPassword] = useState(false);
     const {
         register,
         handleSubmit,
@@ -17,9 +20,18 @@ function LoginForm({onSubmit}) {
           categories: [],
         },
       });
+
+    const onSubmit = (data)=>{
+      if(!data.email || !data.password) return;
+      const email = data?.email;
+      const password = data?.password;
+      loginSeller({email, password})
+    }
+
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="space-y-6">
+            <div className="space-y-3 lg:space-y-4">
               <Fields
                 forTag="email"
                 labelName="Email"
@@ -49,6 +61,7 @@ function LoginForm({onSubmit}) {
                 errors={errors}
                 type={showPassword ? "text" : "password"}
               />
+              
             </div>
 
             <Link
@@ -60,9 +73,11 @@ function LoginForm({onSubmit}) {
 
             <button
               type="submit"
-              className="mt-6 bg-primary text-white w-full py-3 rounded-xl text-base font-medium shadow-lg"
-            >
-              Log In
+              className="mt-3 lg:mt-6 bg-primary text-white w-full py-2 lg:py-3 rounded lg:rounded-xl text-sm font-medium shadow-lg flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:bg-neutral-100/70"
+              disabled={loading}
+            > 
+              {loading && <SpinnerMini />}
+              <span>Log in</span>
             </button>           
           </form>
     )

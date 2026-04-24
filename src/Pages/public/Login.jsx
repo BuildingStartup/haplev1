@@ -1,21 +1,17 @@
 import { useState } from "react";
-import { GoArrowLeft } from "react-icons/go";
 import AuthLayout from "../../layouts/AuthLayout";
 import LoginForm from "../../features/authentication/LoginForm";
+import { Link } from "react-router-dom";
 export default function Login() {
-  const [fieldData, setFieldData] = useState("");
   
-  const onSubmit = (data) => {
-    setFieldData(data);
-  };
-  // console.log(fieldData, errors);
+  
   return (
     <AuthLayout>
       <main
-        className="flex items-center justify-center"
+        className="flex lg:items-center justify-center"
       >
         
-        <section className="flex justify-center">
+        <section className="flex w-full px-3 lg:px-0 lg:w-fit lg:justify-center">
 
         {/* Login Image */}
         <div className="flex-1 hidden lg:block relative">
@@ -43,20 +39,22 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="flex-1 bg-white space-y-3 rounded-r-2xl p-10">          
-          <div className="text-left space-y-3 mb-7">
-            <h1 className="text-stroke-100 font-bold text-3xl capitalize">
+        <div className="flex-1 bg-white space-y-1 lg:space-y-3 rounded-lg lg:rounded-r-2xl px-4 py-10 lg:p-10">          
+          <div className="text-center lg:text-left space-y-0.5 lg:space-y-1 mb-3 lg:mb-7">
+            <h1 className="text-stroke-100 font-bold text-2xl lg:text-3xl capitalize">
               Welcome Back
             </h1>
-            <p className=" text-neutral-100 text-sm">
+            <p className=" text-neutral-100 text-xs lg:text-sm">
               Log in to your Haple account
             </p>
           </div>
           {/* Login Form */}
-          <LoginForm onSubmit={onSubmit} />
-          <p className="text-center text-neutral-100">
+          <LoginForm />
+          <p className="text-center text-neutral-100 text-xs mt-4">
               Don't have an account?{" "}
-              <span className="text-primary font-medium">Sign up</span>
+              <Link to="/signUp">
+                <span className="text-primary font-medium">Sign up</span>
+              </Link>
           </p>
         </div>
         </section>

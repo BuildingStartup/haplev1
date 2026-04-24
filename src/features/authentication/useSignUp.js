@@ -19,7 +19,7 @@ function useSignUp(){
             });
             toast.success("Your Profile is Live!.");
             if(typeof onSuccess === "function") onSuccess();
-            navigate(`/my-profile`);
+            navigate(`/login`);
         } catch (err) {
             setError(err.message);
             toast.error(`Sign up failed: ${err.message}`);

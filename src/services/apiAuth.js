@@ -15,7 +15,6 @@ export async function signUpSeller({email, password, profileData}){
                 whatsapp_number: profileData?.whatsapp,
                 is_active: true, 
                 campus: "Bowen University",
-                // FIX: Use the full string '0b4cc712...', not [0]
                 category_id: profileData?.categories
             }
         }

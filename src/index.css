@@ -32,6 +32,16 @@ body {
   --color-secondary-300: #BA1A1A;
 
   --color-dark-100: #2f2f2f;
+
+  --animate-scroll: scroll 30s linear infinite;
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    /* Adjust based on how many items/duplicates you have */
+    to { transform: translateX(calc(-150% - 0.5rem)); } 
+  }
+
+
 }
 
 @layer utilities {

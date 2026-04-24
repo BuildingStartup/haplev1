@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
+import Modal from "./Modal";
 
 function Applayout(){
     return (
         <div className="bg-accent-light">
-            <Outlet />
+            <Modal>
+                <Outlet />
+            </Modal>
         </div>
     )
 }

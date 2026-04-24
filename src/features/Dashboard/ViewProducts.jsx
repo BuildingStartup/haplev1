@@ -11,12 +11,12 @@ export default function ViewProducts({products, handleDelete, isDeleting}){
     };
 
     const handleDeleteClick = async (id) => {
-      // setDeletingProductId(id);
-      // try {
-      //   await handleDelete(id);
-      // } finally {
-      //   setDeletingProductId(null);
-      // }
+      setDeletingProductId(id);
+      try {
+        await handleDelete(id);
+      } finally {
+        setDeletingProductId(null);
+      }
     };
 
     return (
@@ -40,7 +40,7 @@ export default function ViewProducts({products, handleDelete, isDeleting}){
 
                     <div className="relative h-35 lg:h-[218.98px]">
                       <img
-                        src={`../${prod.image_url}.jpg`}
+                        src={prod.image_url}
                         alt={prod.name}
                         className={`w-full h-full object-cover transition-all duration-500 ${
                           loadedImages[prod.id] ? 'blur-0' : 'blur-md'

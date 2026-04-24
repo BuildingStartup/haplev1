@@ -6,13 +6,14 @@ import Topsellers from "../../ui/Topsellers";
 import VerifiedSellers from "../../ui/VerifiedSellers";
 import useCategories from "../../features/categories/useCategories";
 import { useEffect } from "react";
+import SplashScreen from "../../ui/SplashScreen";
 
 export default function Homepage(){
     const { loading: categoryLoading, categories, getAllCategories } = useCategories();
     useEffect(() => {
         getAllCategories();
       }, []);
-    if(categoryLoading) return <p>loading</p>
+    if(categoryLoading) return <SplashScreen />;
     return (
         <MainLayout>
             <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">

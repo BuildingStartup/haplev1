@@ -6,7 +6,7 @@ export default function SplashScreen() {
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 1.2 } }} // Smooth 1.2s fade out
+      exit={{ opacity: 0, transition: { duration: 2 } }} // Smooth 1.2s fade out
       className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-white text-primary px-6"
     >
       {/* LOGO */}
@@ -22,7 +22,7 @@ export default function SplashScreen() {
         }}
         className="mb-6"
       >
-        <img className="w-22 h-20" src="../logo.svg" alt="logo" />
+        <img className="w-22 lg:w-30" src="../logo.svg" alt="logo" />
       </motion.div>
       
     </motion.div>

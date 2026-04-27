@@ -188,7 +188,7 @@ export default function AddProductForm({
         <>
         {showForm && (
                 <form
-                  className={`mx-5 bg-neutral-600/3 rounded-lg px-4 py-2 flex flex-col gap-6.5 transition-opacity duration-300 ${isProductUploadBusy ? "opacity-85" : "opacity-100"}`}
+                  className={`lg:mx-5 bg-neutral-600/3 rounded-lg px-2 lg:px-4 py-2 flex flex-col gap-6.5 transition-opacity duration-300 ${isProductUploadBusy ? "opacity-85" : "opacity-100"}`}
                   aria-busy={isProductUploadBusy}
                 >                  
                   <span className="capitalize text-lg">New listing</span>                  
@@ -311,7 +311,7 @@ export default function AddProductForm({
                     <button
                       type="button"
                       onClick={submitProduct}
-                      className="flex-4 p-3 bg-primary rounded text-white cursor-pointer flex items-center justify-center gap-2 shadow active:scale-95 transition-all capitalize disabled:cursor-not-allowed disabled:opacity-70" disabled={isProductUploadBusy}>
+                      className="flex-4 p-3 bg-primary rounded text-white cursor-pointer flex items-center justify-center gap-2 shadow active:scale-95 transition-all capitalize disabled:cursor-not-allowed disabled:opacity-70" disabled={isProductUploadBusy }>
                         {isProductUploadBusy && <SpinnerMini />}
                         {isProductUploadBusy ? "saving product..." : "save product"}
                     </button>

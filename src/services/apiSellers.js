@@ -83,29 +83,10 @@ export async function getSellersByCategory(categoryId){
 
 
 export async function updateSellerProfile(sellerId, profileData){
-    //1. checking if it has an image path already
-    const hasImagePath = profileData.avatar_url?.startsWith?.(supabaseUrl);
-
-    //2. create an image name
-    //choose a base for the image name: existing path, string name, file.name or fallback image.
-
-    const imageBase = hasImagePath ? profileData.avatar_url
-    : (typeof profileData.avatar_url === "string" 
-        ? profileData.avatar_url : profileData.avatar_url?.name
-        || "image");
     
-        const imageName = `${Math.random()}-${imageBase}`.replaceAll("/", "");
-    
-    const filePath = `seller-${sellerId}/${imageName}`;
-    
-    //3. follows this pattern //https://mnojffbasafjsyamcbqw.supabase.co/storage/v1/object/public/seller-avatar/seller-123/team3.jpg
-    const imagePath = hasImagePath ? profileData.avatar_url
-    : `${supabaseUrl}/storage/v1/object/public/seller-avatar/${filePath}`;
-
-
     const {data: seller, error} = await supabase
     .from("sellers")
-    .update({...profileData, avatar_url: imagePath})
+    .update(profileData)
     .eq("id", sellerId)
     .select()
     .single();
@@ -113,21 +94,7 @@ export async function updateSellerProfile(sellerId, profileData){
     if(error){
         console.log(error);
         throw new Error(error || "Profile could not be updated!");
-    }
-
-    //2. upload image
-    //if cover has already a hosted url, skip upload and return db result.
-    if(hasImagePath) return seller;
-
-    const {error: storageError} = await supabase
-    .storage
-    .from("seller-avatar")
-    .upload(filePath, profileData.avatar_url)
-
-    if(storageError){
-        console.log(storageError)
-        throw new Error("Profile image could not be uploaded!")
-    }
+    }    
 
     return seller;
 };

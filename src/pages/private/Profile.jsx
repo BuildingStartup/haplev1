@@ -10,12 +10,15 @@ import AddProductForm from "../../features/Dashboard/AddProductForm";
 import useSeller from "../../features/profiles/useSeller";
 import useSellerCategory from "../../features/categories/useSellerCategory";
 import useSellerImages from "../../features/profiles/useSellerImages";
-import useSignOut from "../../features/authentication/useSignOut";
+import ProfileData from "../../features/Dashboard/ProfileData";
+import ProfileBanner from "../../features/Dashboard/ProfileBanner";
+import ProfileEdit from "../../features/Dashboard/ProfileEdit";
 import SplashScreen from "../../ui/SplashScreen";
+import Modal from "../../ui/Modal";
 
 function Profile() {
     const { user } = useAuth();
-  const { fetchSellerById, seller: sellerInfo, loading, error } = useSeller();
+  const { fetchSellerById, seller: sellerInfo, loading, error } = useSeller();  
   const {
     fetchSellerCategory,
     loading: categoryLoading,
@@ -32,7 +35,6 @@ function Profile() {
       loading: imageLoading,
       error: imageError,
   } = useSellerImages();
-  const { loading: signOutLoading, handleSignOut } = useSignOut();
 
   useEffect(() => {
     if (user?.id) fetchSellerById(user.id);
@@ -66,9 +68,7 @@ function Profile() {
         if (item.preview) URL.revokeObjectURL(item.preview);
       });
     };
-  }, []);
-
-  
+  }, []);  
 
   const deleteProduct = async (imageId) => {
     if (!imageId) return;
@@ -88,63 +88,25 @@ function Profile() {
     setShowForm(true);
   };
 
-  const handleLogout = () => {
-    handleSignOut();
-  };
-
+  
   if (loading || categoryLoading || imageLoading) return <SplashScreen />;
   if (error || categoryError || imageError) return <NetworkError />;
   if (!sellerInfo) return <p>No seller data found</p>;
 
-  const remaining = 4 - images.length;
-
-  // Share and Copy
-  const profilePath = `/seller/${sellerInfo?.username}`;
-  const profileUrl = `${window.location.origin}${profilePath}`;
-  // e.g. http://localhost:5173/seller/john
-  // or https://yourdomain.com/seller/john in production
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      await navigator.share({
-        title: sellerInfo.business_name,
-        text: `Check out ${sellerInfo.business_name} on Haple!`,
-        url: profileUrl,
-      });
-    }
-  };
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(profileUrl).then(() => alert("Link copied!"));
-  };
+  const remaining = 4 - images.length;  
 
     return (
         <DashLayout>
             <main className="space-y-8 px-3 py-2 lg:px-12 lg:py-3 h-screen no-scrollbar overflow-y-auto">
-                <div className="relative w-full h-45 lg:h-70">
-                    <img src="../sellerBanner.jpg" alt="seller banner" className="h-full w-full object-cover rounded-lg" />
-                    <div className="absolute top-2 lg:top-4 right-2 lg:right-6 flex items-center gap-2.5 text-white p-1 lg:p-2.5 ring ring-white rounded bg-neutral-100/15">
-                        <FaCamera />
-                        <span>Change Cover</span>
-                    </div>
-                </div>
-                <div className="-mt-20 lg:-mt-30 relative lg:px-6 flex flex-col lg:justify-between items-center lg:items-start gap-4 lg:flex-row">
+                <ProfileBanner sellerInfo={sellerInfo} />
+                <div className="-mt-20 lg:-mt-30 relative lg:px-6 flex flex-col lg:justify-between lg:items-start gap-4 lg:flex-row">
 
-                    <div className="flex-1 bg-white p-2 lg:p-4 rounded-lg space-y-3 flex flex-col items-center">
-                        <div className="relative w-25 lg:w-57.5 h-25 lg:h-57.5 overflow-hidden">
-                            <img src="../seller5.jpg" alt="seller logo" className="w-full h-full rounded-full" />
-                            <HiOutlineCamera className="text-xl absolute bottom-2 lg:bottom-8 right-0 lg:right-5 fill-white stroke-primary" strokeWidth={2}/>
-                        </div>
-                        <div className="p-1 lg:p-2.5 flex flex-col justify-center items-center gap-3">
-                            <h1 className="text-xl lg:text-2xl font-semibold">The Brunch Box</h1>
-                            <span className="py-1.5 px-6 rounded-full bg-neutral-100/16">Shoes</span>
-                        </div>
-                    </div>
+                    <ProfileData sellerInfo={sellerInfo} category={category} />
 
                     <div className="flex-4 rounded-lg p-2 lg:p-4 space-y-4 lg:space-y-6 bg-white">
                         <div className="space-y-1 ring ring-black/22 lg:space-y-4 p-2 lg:p-10 rounded-xl lg:rounded-2xl">
                         <h2 className="text-base lg:text-xl font-medium">About</h2>
-                        <p className="lg:text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate dolore nobis commodi. Repudiandae laudantium doloremque illum unde nulla explicabo quam omnis consectetur debitis corporis placeat qui laboriosam vel, libero architecto.</p>
+                        <p className="lg:text-sm">{sellerInfo?.description}</p>
                     </div>
 
                     <div className="flex items-center gap-3 mb-3">
@@ -156,7 +118,7 @@ function Profile() {
                     {/*view products  */}
                     <ViewProducts
                         products={images}
-                        isDeleting={false}
+                        isDeleting={isDeleting}
                         handleDelete={(imageId) => deleteProduct(imageId)}
                     />
 
@@ -184,17 +146,26 @@ function Profile() {
                     />
 
                     {/* Contact Row */}
-                    <SellerContact sellerInfo={sellerInfo} />
+                    <SellerContact sellerInfo={sellerInfo} category={category} />
 
                     {/* action */}
                     <div className="flex gap-2.5 w-full lg:w-120.5">
-                        <button className="bg-primary flex-1 lg:flex-4 p-1.5 lg:p-2.5 text-white rounded">Edit Profile</button>
-                        <button className="flex-1 lg:flex-2 p-1.5 lg:p-2.5 rounded bg-neutral-100/15">Share</button>
+                        <Modal.Open opens={"profileEdit"}>
+                          <button className="bg-primary flex-1 lg:flex-4 p-1.5 lg:p-2.5 text-white rounded">
+                            Edit Profile
+                          </button>
+                        </Modal.Open>
+                        <button className="flex-1 lg:flex-2 p-1.5 lg:p-2.5 rounded bg-neutral-100/15">
+                          Share
+                        </button>
                     </div>
 
                     </div>
 
                 </div>
+                <Modal.Window name="profileEdit" noClose={true}>
+                  <ProfileEdit sellerInfo={sellerInfo} />
+                </Modal.Window>
             </main>
         </DashLayout>
     )

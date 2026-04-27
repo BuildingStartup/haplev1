@@ -2,12 +2,12 @@ import { FaWhatsapp } from "react-icons/fa";
 import { MdOutlineCategory } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
 import { FcCalendar } from "react-icons/fc";
-// import { formatDateFns } from "../utils/helpers";
+import { formatDateFns } from "../../utils/helpers";
 
 export default function SellerContact({sellerInfo, category}){
   
 
-    // const date_created = formatDateFns(sellerInfo?.created_at);
+    const date_created = formatDateFns(sellerInfo?.created_at);
 
     return (
         <div className="flex flex-col gap-3.5">
@@ -29,7 +29,7 @@ export default function SellerContact({sellerInfo, category}){
             <div className="flex items-center gap-3 text-dark-100">
             <FcCalendar className="lg:text-lg" />
             <p className="lg:text-sm">
-                24th April, 2026
+                {date_created}
             </p>
             </div>
 

@@ -2,12 +2,12 @@ import { GoSearch } from "react-icons/go";
 import { IoNotificationsOutline, IoReorderThreeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-function NavbarDash() {
+function NavbarDash({setIsOpen}) {
     return (
         <div className="flex justify-between items-center lg:justify-end">
 
             <div className="flex items-center gap-1 lg:hidden">
-                <IoReorderThreeOutline className="text-2xl" />
+                <IoReorderThreeOutline className="text-2xl" onClick={setIsOpen} />
                 <Link to="/">
                     <img src="../logo.svg" alt="logo" className="w-15" />
                 </Link>

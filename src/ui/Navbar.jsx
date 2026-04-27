@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
+import { MdOutlineDashboard } from "react-icons/md";
 
 function Navbar() {
+    const {user} = useAuth();
+    
     return (
         <div className="flex justify-between items-center">
 
@@ -10,10 +14,28 @@ function Navbar() {
                 </Link>
                 </picture>
 
+            {user ? (
+                <Link to="/my-profile">
+                <button className="flex items-center gap-1 lg:gap-2 bg-primary px-3 py-1 capitalize font-medium shadow-md lg:px-6 lg:py-2 text-white ring-1 rounded">
+                    <MdOutlineDashboard className="text-lg lg:text-xl" />
+                    <span>Dashboard</span>
+                </button>
+                </Link>
+            ): 
+            (
             <div className="flex gap-2 lg:gap-3.5">
-                <button className="ring-1 ring-neutral-400 px-3 py-1 capitalize rounded font-medium shadow-md lg:px-6 lg:py-2">login</button>
-                <button className="ring-1 bg-primary text-white px-3 py-1 rounded shadow-md lg:px-6 lg:py-2">Join as a seller</button>
+                <button className="ring-1 ring-neutral-400 px-3 py-1 capitalize rounded font-medium shadow-md lg:px-6 lg:py-2">
+                    <Link to="/login">
+                        login
+                    </Link>
+                </button>
+                <button className="ring-1 bg-primary text-white px-3 py-1 rounded shadow-md lg:px-6 lg:py-2">
+                    <Link to="/signUp">
+                        Join as a seller
+                    </Link>
+                </button>
             </div>
+            )}
 
         </div>
     )

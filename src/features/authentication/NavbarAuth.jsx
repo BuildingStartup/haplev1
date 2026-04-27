@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom"
+
 function NavbarAuth() {
     return (
         <div className="flex justify-between items-center">
 
             <picture className="w-13 lg:w-18">
-                <img src="../logo.svg" alt="logo" className="w-full" />
+                <Link to="/">
+                    <img src="../logo.svg" alt="logo" className="w-full" />
+                </Link>
             </picture>
 
             {/* <div className="flex gap-2 lg:gap-3.5">

@@ -163,6 +163,131 @@ export async function deleteSellerImage(sellerId, imageId){
 
 
 
+export async function uploadSellerAvatar(sellerId, avatar_url){
+    //1. checking if it has an image path already
+     const hasImagePath = avatar_url?.startsWith?.(supabaseUrl);
+
+    //2. create an image name
+     //choose a base for the image name: existing path, string name, file.name or fallback image.
+ 
+    const imageBase = hasImagePath ? avatar_url
+     : (typeof avatar_url === "string" 
+         ? avatar_url : avatar_url?.name
+         || "image");
+     
+    const imageName = `${Math.random()}-${imageBase}`.replaceAll("/", "");
+     
+     const filePath = `seller-${sellerId}/${imageName}`;
+     
+     //3. follows this pattern //https://mnojffbasafjsyamcbqw.supabase.co/storage/v1/object/public/seller-avatar/seller-123/team3.jpg
+     const imagePath = hasImagePath ? avatar_url
+     : `${supabaseUrl}/storage/v1/object/public/seller-avatar/${filePath}`;
+
+     const {data: seller, error} = await supabase
+     .from("sellers")
+     .update({avatar_url: imagePath})
+     .eq("id", sellerId)
+     .select()
+     .single();
+
+    if(error){
+        console.log(error);
+        throw new Error(error || "Avatar could not be updated!");
+    }
+
+    //2. upload image
+    //if cover has already a hosted url, skip upload and return db result.
+    if(hasImagePath) return seller;
+
+    const {error: storageError} = await supabase
+    .storage
+    .from("seller-avatar")
+    .upload(filePath, avatar_url)
+
+    if(storageError){
+        console.log(storageError)
+        throw new Error("Avatar image could not be uploaded!")
+    }
+
+    //get public url
+    const {data: publicUrlData, error: publicUrlError} = supabase.storage
+        .from("seller-avatar")
+        .getPublicUrl(filePath);
+    
+    if(publicUrlError){
+        throw new Error(publicUrlError.message);
+    }
+
+    const avatarUrl = publicUrlData.publicUrl;
+
+    return avatarUrl;
+ 
+};
+
+export async function uploadSellerCoverImage(sellerId, coverImage_url){
+    //1. checking if it has an image path already
+     const hasImagePath = coverImage_url?.startsWith?.(supabaseUrl);
+
+    //2. create an image name
+     //choose a base for the image name: existing path, string name, file.name or fallback image.
+ 
+    const imageBase = hasImagePath ? coverImage_url
+     : (typeof coverImage_url === "string" 
+         ? coverImage_url : coverImage_url?.name
+         || "image");
+     
+    const imageName = `${Math.random()}-${imageBase}`.replaceAll("/", "");
+     
+     const filePath = `seller-${sellerId}/${imageName}`;
+     
+     //3. follows this pattern //https://mnojffbasafjsyamcbqw.supabase.co/storage/v1/object/public/seller-coverImage/seller-123/team3.jpg
+     const imagePath = hasImagePath ? coverImage_url
+     : `${supabaseUrl}/storage/v1/object/public/seller-coverImage/${filePath}`;
+
+     const {data: seller, error} = await supabase
+     .from("sellers")
+     .update({coverImage_url: imagePath})
+     .eq("id", sellerId)
+     .select()
+     .single();
+
+    if(error){
+        console.log(error);
+        throw new Error(error || "Avatar could not be updated!");
+    }
+
+    //2. upload image
+    //if cover has already a hosted url, skip upload and return db result.
+    if(hasImagePath) return seller;
+
+    const {error: storageError} = await supabase
+    .storage
+    .from("seller-coverImage")
+    .upload(filePath, coverImage_url)
+
+    if(storageError){
+        console.log(storageError)
+        throw new Error("Avatar image could not be uploaded!")
+    }
+
+    //get public url
+    const {data: publicUrlData, error: publicUrlError} = supabase.storage
+        .from("seller-coverImage")
+        .getPublicUrl(filePath);
+    
+    if(publicUrlError){
+        throw new Error(publicUrlError.message);
+    }
+
+    const avatarUrl = publicUrlData.publicUrl;
+
+    return avatarUrl;
+ 
+};
+
+
+
+
 
 
 

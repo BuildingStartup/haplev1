@@ -6,7 +6,7 @@ export default function NetworkError() {
           <img
             src="./Phone-WIFI.png"
             alt="Phone displaying No signal"
-            className="w-60 h-60 object-cover"
+            className="w-60 lg:w-80 h-60 lg:h-80 object-cover"
           />
         </div>
         <div className="text-center text-xl mt-2">
@@ -17,10 +17,10 @@ export default function NetworkError() {
           </div>
         </div>
       </div>
-      <div className="p-6 w-5/6">
+      <div className="p-6 w-5/6 lg:flex lg:items-center lg:justify-center">
         <button
           onClick={() => window.location.reload()}
-          className="w-full bg-primary text-white py-3 rounded-xl text-base cursor-pointer"
+          className="w-full lg:w-fit bg-primary text-white py-3 lg:px-12 lg:py-2 lg:rounded rounded-xl text-base cursor-pointer"
         >
           Retry
         </button>

@@ -30,7 +30,7 @@ function Open({children, opens: opensWindowName}){
         }})
 }
 
-function Window({children, name}){
+function Window({children, name, noClose= false}){
     const {openName, close} = useContext(ModalContext);
     const ref = useOutsideClick(close);
 
@@ -39,7 +39,7 @@ function Window({children, name}){
     return createPortal (
         <div className="fixed top-0 left-0 w-full h-screen bg-black/20 backdrop-blur-sm transition-all duration-500 z-50">
             <StyledModal ref={ref} className="h-full flex flex-col gap-3  justify-center px-5">
-                <button className="p-1.5 rounded-sm group cursor-pointer ml-auto" onClick={close}>
+                <button className={`p-1.5 rounded-sm group cursor-pointer ml-auto ${noClose ? "hidden": ""}`} onClick={close}>
                     <HiXMark className="text-xl font-bold" />
                 </button>
                 <div>
@@ -65,9 +65,9 @@ function Preview({children, name, key}){
 
     if(name !== openName) return null;
 
-    return createPortal (
-        <div className="fixed top-0 left-0 w-full h-screen bg-black/20 backdrop-blur-sm transition-all duration-500 z-50" key={key}>
-            <StyledModal ref={ref} className="h-full flex flex-col gap-3  justify-center px-5">
+    return createPortal (        
+        <div className="fixed top-0 left-0 h-screen w-full bg-black/20 backdrop-blur-sm transition-all duration-500 z-50 flex min-h-screen items-center justify-center " key={key}>
+            <StyledModal ref={ref} className="h-full lg:w-200 flex flex-col gap-3  justify-center px-5">
                 <button className="p-1.5 rounded-sm bg-primary  group hover:bg-white  cursor-pointer ml-auto" onClick={close}>
                     <HiXMark className="text-xl text-white group-hover:text-primary" />
                 </button>

@@ -6,9 +6,8 @@ import { useNavigate } from "react-router-dom";
 function useUpdateSeller(){
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
-    const updateSeller = async (id, formData) => {
+    const updateSeller = async (id, formData, onCloseModal) => {
         setLoading(true);
         setError(null);
         try{
@@ -20,7 +19,7 @@ function useUpdateSeller(){
             }
             
             toast.success("Profile updated successfully!");
-            navigate(`/my-profile`, {replace: true});
+            onCloseModal?.();
         }
         catch(err){
             const message = err?.message || "An error occurred while updating the profile.";

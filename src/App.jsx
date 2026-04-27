@@ -15,6 +15,7 @@ import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 
 import Error404 from "./ui/Error404.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx";
+import ProfileEdit from "./features/Dashboard/ProfileEdit.jsx";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
                 <Profile />
               </ProtectedRoute>
             } />
-
+            
             {/* auth */}
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />

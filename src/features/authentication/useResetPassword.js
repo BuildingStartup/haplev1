@@ -15,7 +15,7 @@ function useResetPassword(){
             await updateUserPassword(newPassword)
             toast.success("Password updated successfully! Redirecting to login..")
             setTimeout(()=>{
-                navigate("/signIn");
+                navigate("/login");
             }, 3000)
         }
         catch(err){

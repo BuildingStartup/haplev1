@@ -9,7 +9,7 @@ import { HiXMark } from "react-icons/hi2";
 
 export default function ProfileEdit({onCloseModal, sellerInfo}){
     const {loading: updateLoading, updateSeller} = useUpdateSeller();
-    const { register, setValue, watch, handleSubmit, formState: { errors },} = useForm({
+    const { register, setValue, handleSubmit, formState: { errors },} = useForm({
         values: sellerInfo || {},
         resetOptions: {
             keepDirtyValues: true, //retains user input if they started editing early

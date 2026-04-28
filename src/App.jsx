@@ -9,13 +9,12 @@ import SignUp from "./pages/public/SignUp.jsx";
 
 import Profile from "./pages/private/Profile"
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
-// import ResetPassword from "./Pages/ResetPassword.jsx";
-// import ChangePassword from "./Pages/ChangePassword.jsx";
-// import Success from "./UI/Success.jsx";
+import ResetPassword from "./pages/public/ResetPassword.jsx"
 
 import Error404 from "./ui/Error404.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx";
-import ProfileEdit from "./features/Dashboard/ProfileEdit.jsx";
+import DashLayout from "./layouts/DashLayout.jsx";
+import UpdatePassword from "./pages/public/updatePassword.jsx";
 
 function App() {
   return (
@@ -29,16 +28,16 @@ function App() {
             {/* dashboard */}
             <Route path="/my-profile" element={
               <ProtectedRoute>
-                <Profile />
+                <DashLayout />
               </ProtectedRoute>
             } />
             
             {/* auth */}
             <Route path="/login" element={<Login />} />
             <Route path="/signUp" element={<SignUp />} />
-            {/* <Route path="/password-reset" element={<ResetPassword />} /> */}
-            {/* <Route path="/new-password" element={<ChangePassword />} /> */}
-            {/* <Route path="/success" element={<Success />} /> */}
+            <Route path="/password-reset" element={<ResetPassword />} />
+            <Route path="/updatePassword" element={<UpdatePassword />} />
+            
 
             {/* fallback route */}
             <Route path="*" element={<Error404 />} />

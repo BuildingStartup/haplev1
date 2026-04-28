@@ -14,7 +14,7 @@ function useSignOut(){
         try{
             await apiSignOut();
             toast.success("Signed out successfully!");
-            navigate("/signIn");
+            navigate("/login");
         } catch(err){
             console.log(err);
             setError(err.message);

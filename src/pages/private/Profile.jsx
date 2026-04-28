@@ -7,18 +7,16 @@ import AddProductButton from "../../features/Dashboard/AddProductButton";
 import SellerContact from "../../features/Dashboard/SellerContact";
 import ViewProducts from "../../features/Dashboard/ViewProducts";
 import AddProductForm from "../../features/Dashboard/AddProductForm";
-import useSeller from "../../features/profiles/useSeller";
 import useSellerCategory from "../../features/categories/useSellerCategory";
 import useSellerImages from "../../features/profiles/useSellerImages";
 import ProfileData from "../../features/Dashboard/ProfileData";
 import ProfileBanner from "../../features/Dashboard/ProfileBanner";
 import ProfileEdit from "../../features/Dashboard/ProfileEdit";
-import SplashScreen from "../../ui/SplashScreen";
 import Modal from "../../ui/Modal";
+import SpinnerDash from "../../ui/SpinnerDash";
 
-function Profile() {
-    const { user } = useAuth();
-  const { fetchSellerById, seller: sellerInfo, loading, error } = useSeller();  
+function Profile({sellerInfo, loading, error}) {
+   
   const {
     fetchSellerCategory,
     loading: categoryLoading,
@@ -36,9 +34,6 @@ function Profile() {
       error: imageError,
   } = useSellerImages();
 
-  useEffect(() => {
-    if (user?.id) fetchSellerById(user.id);
-  }, [user]);
 
   useEffect(() => {
     if (sellerInfo?.category_id) fetchSellerCategory(sellerInfo.category_id);
@@ -89,14 +84,14 @@ function Profile() {
   };
 
   
-  if (loading || categoryLoading || imageLoading) return <SplashScreen />;
+  if (loading || categoryLoading || imageLoading) return <SpinnerDash />;
   if (error || categoryError || imageError) return <NetworkError />;
   if (!sellerInfo) return <p>No seller data found</p>;
 
   const remaining = 4 - images.length;  
 
     return (
-        <DashLayout>
+        // <DashLayout>
             <main className="space-y-8 px-3 py-2 lg:px-12 lg:py-3 h-screen no-scrollbar overflow-y-auto">
                 <ProfileBanner sellerInfo={sellerInfo} />
                 <div className="-mt-20 lg:-mt-30 relative lg:px-6 flex flex-col lg:justify-between lg:items-start gap-4 lg:flex-row">
@@ -167,7 +162,7 @@ function Profile() {
                   <ProfileEdit sellerInfo={sellerInfo} />
                 </Modal.Window>
             </main>
-        </DashLayout>
+        // </DashLayout>
     )
 }
 

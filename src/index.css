@@ -26,11 +26,15 @@ body {
   --color-neutral-400: #C1C3CA;
   --color-neutral-500: #6B7280;
   --color-neutral-600: #4d4d4d;
+  --color-neutral-700: #A4A6AC;
   --color-stroke-100: #191C1D;
   --color-secondary-100: #5DFD8A;
   --color-secondary-200: #22A747;
   --color-secondary-300: #BA1A1A;
   --color-secondary-400: #006D2F;
+  --color-secondary-500: #F2994A;
+  --color-secondary-600: #F2C94C;
+  --color-secondary-700: #F59E0B;
 
   --color-dark-100: #2f2f2f;
 

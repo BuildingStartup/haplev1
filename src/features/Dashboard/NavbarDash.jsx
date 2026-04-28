@@ -2,7 +2,8 @@ import { GoSearch } from "react-icons/go";
 import { IoNotificationsOutline, IoReorderThreeOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-function NavbarDash({setIsOpen}) {
+function NavbarDash({setIsOpen, sellerInfo}) {
+    const initials = (sellerInfo?.business_name || "?").slice(0, 2).toUpperCase();
     return (
         <div className="flex justify-between items-center lg:justify-end">
 
@@ -21,7 +22,7 @@ function NavbarDash({setIsOpen}) {
                         <span className="absolute w-2 h-2 rounded-full bg-secondary-300 top-2 right-2"></span>
                 </div>
                 <div className="p-1 lg:p-2 bg-primary-lighter rounded-full">
-                    <span className="lg:text-sm text-primary-light font-medium">AC</span>
+                    <span className="lg:text-sm text-primary-light font-medium">{initials}</span>
                 </div>
            </div>
 

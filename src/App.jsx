@@ -15,6 +15,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import DashLayout from "./layouts/DashLayout.jsx";
 import UpdatePassword from "./pages/public/updatePassword.jsx";
 import CategorySellers from "./pages/public/CategorySellers.jsx";
+import AllSellers from "./pages/public/AllSellers.jsx";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/seller" element={<SellerProfile />} />
             <Route path="/:catalog/:slug" element={<CategorySellers />} />
+            <Route path="/allSellers" element={<AllSellers />} />
 
 
             {/* dashboard */}

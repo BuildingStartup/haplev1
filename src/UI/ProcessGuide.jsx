@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function ProcessGuide({target}) {
 
     const buyer = [
@@ -6,18 +8,21 @@ function ProcessGuide({target}) {
             title: "Discover trusted sellers",
             description: "Browse trusted campus stores and products on Haple. Search by category, brand, or what's trending around you.",
             cta: "Start Browsing",
+            linkTo: "/allSellers",
         },
         {
             imgSrc: "../buyers2.jpg",
             title: "Connect with sellers",
             description: "Tap a profile to see seller info. Message the seller directly on Whatsapp to ask questions or place your order.",
             cta: "Chat a Seller",
+            linkTo: "/allSellers",
         },
         {
             imgSrc: "../buyers3.jpg",
             title: "Buy with confidence",
             description: "Pay the seller how you both agree and pick up on campus or arrange delivery. All sellers are verified campus stores.",
             cta: "Find stores near you",
+            linkTo: "/allSellers",
         },
     ]
     const seller = [
@@ -26,18 +31,21 @@ function ProcessGuide({target}) {
             title: "Create your store",
             description: "Sign up and set up your Haple profile in minutes. Add your products, prices and contact details.",
             cta: "Create your store",
+            linkTo: "/signUp",
         },
         {
             imgSrc: "../sellers2.jpg",
             title: "Get discovered",
             description: "Show up where students are already looking. Your store stays live 24/7 so buyers can find you beyond the Trade Fair.",
             cta: "Go live now",
+            linkTo: "/signUp",
         },
         {
             imgSrc: "../sellers3.jpg",
             title: "Sell & Track Growth",
             description: "Connect with eager buyers, close sales on Whatsapp, and use your Haple insights to see what's working.",
             cta: "Start Selling Today",
+            linkTo: "/login",
         },
     ]
 
@@ -51,7 +59,9 @@ function ProcessGuide({target}) {
                     <div className="space-y-1 lg:space-y-1.5">
                         <h3 className="text-base font-medium lg:text-lg">{item.title}</h3>
                         <p className="text-sm text-neutral-100">{item.description}</p>
-                        <button className="w-full bg-primary p-2 lg:p-3 lg:text-sm text-white rounded my-2 cursor-pointer">{item.cta}</button>
+                        <Link to={item.linkTo}>
+                            <button className="w-full bg-primary p-2 lg:p-3 lg:text-sm text-white rounded my-2 cursor-pointer">{item.cta}</button>
+                        </Link>
                     </div>
                 </div>
             ))}            
@@ -61,7 +71,9 @@ function ProcessGuide({target}) {
                     <div className="space-y-1 lg:space-y-1.5">
                         <h3 className="text-base font-medium lg:text-lg">{item.title}</h3>
                         <p className="text-sm text-neutral-100">{item.description}</p>
-                        <button className="w-full bg-primary p-2 lg:p-3 lg:text-sm text-white rounded my-2 cursor-pointer">{item.cta}</button>
+                        <Link to={item.linkTo}>
+                            <button className="w-full bg-primary p-2 lg:p-3 lg:text-sm text-white rounded my-2 cursor-pointer">{item.cta}</button>
+                        </Link>
                     </div>
                 </div>
             ))}            

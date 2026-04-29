@@ -7,6 +7,7 @@ import VerifiedSellers from "../../ui/VerifiedSellers";
 import useCategories from "../../features/categories/useCategories";
 import { useEffect } from "react";
 import SplashScreen from "../../ui/SplashScreen";
+import HowItWorks from "../../ui/HowItWorks";
 
 export default function Homepage(){
     const { loading: categoryLoading, categories, getAllCategories } = useCategories();
@@ -20,8 +21,9 @@ export default function Homepage(){
                 <Hero />
                 <CategoriesList categories={categories} />
                 <Topsellers />
+                <HowItWorks />
                 <TopCategories />
-                <VerifiedSellers />                
+                {/* <VerifiedSellers />                 */}
             </main>
         </MainLayout>
     )

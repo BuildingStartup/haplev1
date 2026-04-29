@@ -45,7 +45,7 @@ function BusinessList() {
                                 <h3 className="text-sm lg:text-lg font-medium">{seller.business_name}</h3>
                                 <img src="../checkIcon.svg" alt="verified"/>
                             </div>
-                            <p className="lg:text-base text-neutral-100">{seller.description}</p>
+                            <p className="lg:text-base text-neutral-100 line-clamp-2">{seller.description}</p>
                             <button className="mt-3 lg:mt-6 bg-primary text-white w-full p-1.5 lg:p-2.5 lg:text-sm rounded">View Profile</button>
                         </div>
                     </div>

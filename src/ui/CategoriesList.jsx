@@ -44,8 +44,8 @@ function CategoriesList({categories}) {
             <div className="overflow-x-auto no-scrollbar group">                
                 <div className="grid grid-flow-col auto-cols-[120px] lg:auto-cols-[192px] gap-2 lg:gap-4 no-scrollbar animate-scroll group-hover:[animation-play-state:paused]">
                     {category.map((cat, index) => (
-                        <Link to={`/${cat.catalog}/${cat.slug}`}>
-                        <div key={index} className="flex items-center p-4 rounded-xl justify-center bg-accent lg:p-6 flex-1">
+                        <Link key={index} to={`/${cat.catalog}/${cat.slug}`}>
+                        <div  className="flex items-center p-4 rounded-xl justify-center bg-accent lg:p-6 flex-1">
                             <div className="flex flex-col items-center gap-2 lg:gap-3">
                                 <div className="bg-white w-8 h-8 lg:w-12 lg:h-12 flex items-center justify-center rounded-full">
                                     <span className="text-primary text-base lg:text-lg">
@@ -58,8 +58,8 @@ function CategoriesList({categories}) {
                         </Link>
                     ))}
                     {category.map((cat, index) => (
-                        <Link to={`/${cat.catalog}/${cat.slug}`}>
-                        <div key={index + 1} className="flex items-center p-4 rounded-xl justify-center bg-accent lg:p-6 flex-1">
+                        <Link key={index + 1} to={`/${cat.catalog}/${cat.slug}`}>
+                        <div className="flex items-center p-4 rounded-xl justify-center bg-accent lg:p-6 flex-1">
                             <div className="flex flex-col items-center gap-2 lg:gap-3">
                                 <div className="bg-white w-8 h-8 lg:w-12 lg:h-12 flex items-center justify-center rounded-full">
                                     <span className="text-primary text-base lg:text-lg">

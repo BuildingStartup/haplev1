@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { MdOutlineDashboard } from "react-icons/md";
+import { BsPerson } from "react-icons/bs";
 
 function Navbar() {
     const {user} = useAuth();
@@ -16,9 +17,8 @@ function Navbar() {
 
             {user ? (
                 <Link to="/my-profile">
-                <button className="flex items-center gap-1 lg:gap-2 bg-primary px-3 py-1 capitalize font-medium shadow-md lg:px-6 lg:py-2 text-white ring-1 rounded">
-                    <MdOutlineDashboard className="text-lg lg:text-xl" />
-                    <span>Dashboard</span>
+                <button className="p-1 lg:p-2 bg-primary-lighter rounded-full cursor-pointer">                    
+                    <span className="lg:text-sm text-primary-light font-medium">{(user?.user_metadata?.business_name || "?").slice(0, 2).toUpperCase()}</span>
                 </button>
                 </Link>
             ): 

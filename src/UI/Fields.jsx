@@ -39,7 +39,7 @@ export default function Fields({
           required
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full px-2 lg:px-4 py-2 lg:py-3.5 ring ring-neutral-500 rounded lg:rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${prefix ? "pl-14" : ""}`}
+          className={`w-full px-2 lg:px-4 py-2 lg:py-3.5 ring ring-neutral-500 rounded lg:rounded-lg outline-none focus:ring focus:ring-primary transition-all duration-200 ${prefix ? "pl-14 lg:pl-12" : ""}`}
         />
       </div>
       {errors[forTag] && (

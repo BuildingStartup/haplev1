@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import useSearchSeller from "../features/profiles/useSearchSeller";
 import useSellersCategorySlug from "../features/profiles/useSellersCategorySlug";
 import useCategories from "../features/categories/useCategories";
-import SplashScreen from "./SplashScreen";
 import NetworkError from "./NetworkError";
-import HeaderOperations from "./HeaderOperations";
 import SpinnerDash from "./SpinnerDash";
 
 function CategoryBusinessList(){
-    const { catalog, slug } = useParams();
+    const { catalog, slug } = useParams();    
+    const [searchParams] = useSearchParams();
     const { loading: categoryLoading, getCategoryByCatalogAndSlug, error: categoryError } = useCategories();
     const { loading: sellersLoading, sellers, fetchSellersById } = useSellersCategorySlug();
     const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
@@ -49,6 +48,12 @@ function CategoryBusinessList(){
 
     if (categoryLoading || sellersLoading ) return <SpinnerDash />;
     if (categoryError) return <NetworkError />
+
+    const sortBy = searchParams.get("sortBy") || "latest";
+
+
+
+
     return (            
         <>
             {NumOfSellers > 0 ? <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] lg:grid-cols-4 gap-2 md:gap-4">

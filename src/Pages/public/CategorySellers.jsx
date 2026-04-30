@@ -18,7 +18,7 @@ import OtherCategoriesList from "../../ui/OtherCategoriesList";
 export default function CategorySellers() {
   const { catalog, slug } = useParams();
   const { loading: categoryLoading, getCategoryByCatalogAndSlug } = useCategories();
-  const { loading: categoriesLoading, categories, getAllCategories } = useCategories();
+  const { loading: categoriesLoading, categories, getAllCategories, error: categoryError } = useCategories();
   const { loading: sellersLoading, sellers, fetchSellersById } = useSellersCategorySlug();
   const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
   const [query, setQuery] = useState("");
@@ -49,6 +49,7 @@ export default function CategorySellers() {
 
   // Show loading spinner while fetching categories or sellers
   if (categoryLoading || sellersLoading || categoriesLoading) return <SplashScreen />;
+  if(categoryError) return <NetworkError />
   return (
     <MainLayout>
           <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">

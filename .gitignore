@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+migration/auth_users.csv
+migration/migrate-users.js

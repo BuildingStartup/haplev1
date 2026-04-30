@@ -37,18 +37,20 @@ export default function Homepage(){
         performSearch(searchQuery);
     };
 
+    
+
     // Show loading spinner while fetching categories or sellers
-    if (sellersLoading || categoriesLoading) return <SplashScreen />;
+    if (sellersLoading || categoriesLoading ) return <SplashScreen />;
     if (categoryError || searchError) return <NetworkError />;
     return (
         <MainLayout>
             <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">
                 <Hero />
                 <CategoriesList categories={categories} />
-                <TopProductsellers />
+                <TopProductsellers categories={categories} />
                 <Stats />
                 <HowItWorks />
-                <TopServicesellers />
+                <TopServicesellers categories={categories} />
                 <Faq />
                 {/* <VerifiedSellers />                 */}
             </main>

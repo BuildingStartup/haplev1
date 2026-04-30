@@ -42,7 +42,7 @@ function ProfileData({sellerInfo, category}) {
         <div className="flex-1 bg-white p-4 lg:p-4 rounded-lg space-y-3 flex flex-col items-center w-fit mx-auto">
             <div className="relative w-25 lg:w-57.5 h-25 lg:h-57.5 overflow-hidden ring ring-primary rounded-full">
                 <img src={ avatar || sellerInfo?.avatar_url ||`../personTransparentbg.webp`}alt="seller logo" 
-                className={`w-full h-full rounded-full transition-all duration-500 
+                className={`w-full h-full rounded-full object-cover transition-all duration-500 
                 ${loadedImages[sellerInfo?.id] ? 'blur-0' : 'blur-md'}
                 ${avatarLoading ? 'blur-md' : ''}`}
                 loading="lazy"
@@ -59,7 +59,7 @@ function ProfileData({sellerInfo, category}) {
                 </label>
             </div>
             <div className="p-1 lg:p-2.5 flex flex-col justify-center items-center gap-3">
-                <h1 className="text-xl lg:text-2xl font-semibold">The {sellerInfo.business_name}</h1>
+                <h1 className="text-xl lg:text-2xl font-semibold"> {sellerInfo.business_name}</h1>
                 <span className=" capitalize py-1.5 px-6 rounded-full bg-neutral-100/16">{category?.name}</span>
             </div>
         </div>

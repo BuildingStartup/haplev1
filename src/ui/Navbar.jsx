@@ -18,7 +18,7 @@ function Navbar() {
             {user ? (
                 <Link to="/my-profile">
                 <button className="p-1 lg:p-2 bg-primary-lighter rounded-full cursor-pointer">                    
-                    <span className="lg:text-sm text-primary-light font-medium">{(user?.user_metadata?.business_name || "?").slice(0, 2).toUpperCase()}</span>
+                    <span className="lg:text-sm text-primary-light font-medium">{(user?.user_metadata?.business_name || user?.email || "?").slice(0, 2).toUpperCase()}</span>
                 </button>
                 </Link>
             ): 

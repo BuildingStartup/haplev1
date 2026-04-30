@@ -28,7 +28,7 @@ export async function getSellerByUsername(username){
         console.log(error.message);
         throw new Error(error.message);
     }
-
+    
     return seller;
 }; 
 

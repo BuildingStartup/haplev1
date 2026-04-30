@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaCamera } from "react-icons/fa"
+import { FaCamera, FaImage } from "react-icons/fa"
 import useSellerCoverImage from "../profiles/useSellerCoverImage";
 
 function ProfileBanner({sellerInfo}) {
@@ -41,16 +41,25 @@ function ProfileBanner({sellerInfo}) {
             ${coverImageLoading ? 'blur-md' : ''}`}
             loading="lazy"
             onLoad={() => handleImageLoad(sellerInfo?.id)} /> 
-            : <div className="h-full w-full object-cover rounded-lg bg-primary"></div>
+            : (<div className="h-full w-full object-cover rounded-lg flex items-center justify-center bg-neutral-100">
+                <div className="flex items-center gap-2 text-center px-3">
+                    <FaImage className="text-lg lg:text-2xl" />
+                    <span className="text-sm lg:text-base">
+                        {coverImageLoading ? "Uploading cover image" : "Add a cover Image"}
+                    </span>
+                </div>
+            </div>)
+            
             }
             <label>
-                <div className="absolute top-2 lg:top-4 right-2 lg:right-6 flex items-center gap-2.5 text-white p-1 lg:p-2.5 ring ring-white rounded bg-neutral-100/15 cursor-pointer">
+                <div className="absolute top-2 lg:top-4 right-2 lg:right-6 flex items-center gap-2.5 text-white p-1 lg:p-2.5 ring ring-white rounded bg-neutral-100/15 backdrop-blur-md cursor-pointer">
                     <input 
                         type="file"
                         name="coverImage_url"
                         accept="image/jpeg,image/jpg,image/png,image/webp"
                         onChange={handleCoverChange}
-                        className="hidden" 
+                        className="hidden disabled:cursor-not-allowed"
+                        disabled={coverImageLoading} 
                     />
                     <FaCamera />
                     <span>Change Cover</span>

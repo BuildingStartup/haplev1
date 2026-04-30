@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route element={<Applayout />}>
             <Route path="/" element={<Homepage />} />
-            <Route path="/seller" element={<SellerProfile />} />
+            <Route path="/:username" element={<SellerProfile />} />
             <Route path="/:catalog/:slug" element={<CategorySellers />} />
             <Route path="/allSellers" element={<AllSellers />} />
 

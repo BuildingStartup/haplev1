@@ -237,7 +237,7 @@ export default function AddProductForm({
                             type="text"
                             value={item.name}
                             onChange={(e) => handleProductFieldChange(index, "name", e.target.value)}
-                            placeholder="What are you selling?"
+                            placeholder="Name of product/service"
                             className="p-3 ring ring-stone-200 rounded outline-none focus:ring-primary bg-white transition-all duration-300"
                             disabled={isProductUploadBusy}
                           />

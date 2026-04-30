@@ -88,9 +88,9 @@ function ProcessGuide({ target }) {
       </div>
 
       <div className="relative bg-white rounded-2xl overflow-hidden shadow-md">
-        <div className="flex flex-col md:flex-row min-h-[450px]">
+        <div className="flex flex-col md:flex-row min-h-112.5">
           {/* Image Section */}
-          <div className="w-full md:flex-grow relative h-72 md:h-auto overflow-hidden">
+          <div className="w-full md:grow relative h-72 md:h-auto overflow-hidden">
             <img
               key={item.imgSrc} // Key forces re-animation on change
               src={item.imgSrc}
@@ -102,13 +102,13 @@ function ProcessGuide({ target }) {
           <div className="absolute inset-x-0 top-1/2 flex items-center justify-between px-4 md:hidden">
             <button
               onClick={prevStep}
-              className="p-3 bg-white/80 rounded-full text-base"
+              className="p-3 bg-white/80 rounded-full text-base cursor-pointer"
             >
               <FaArrowLeft />
             </button>
             <button
               onClick={nextStep}
-              className="p-3 bg-white/80 rounded-full text-base"
+              className="p-3 bg-white/80 rounded-full text-base cursor-pointer"
             >
               <FaArrowRight />
             </button>
@@ -128,7 +128,7 @@ function ProcessGuide({ target }) {
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link to={item.linkTo} className="w-full">
-                <button className="w-full md:w-auto px-8 py-3 bg-primary text-white font-semibold rounded-xl transition-all">
+                <button className="w-full cursor-pointer md:w-auto px-8 py-3 bg-primary text-white font-semibold rounded-xl transition-all">
                   {item.cta}
                 </button>
               </Link>
@@ -137,13 +137,13 @@ function ProcessGuide({ target }) {
               <div className="hidden md:flex gap-2 ml-auto">
                 <button
                   onClick={prevStep}
-                  className="p-3 bg-white/80 rounded-full text-base"
+                  className="p-3 bg-white/80 rounded-full text-base cursor-pointer"
                 >
                   <FaArrowLeft />
                 </button>
                 <button
                   onClick={nextStep}
-                  className="p-3 bg-white/80 rounded-full text-base"
+                  className="p-3 bg-white/80 rounded-full text-base cursor-pointer"
                 >
                   <FaArrowRight />
                 </button>

@@ -1,12 +1,13 @@
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 import { BsChat } from "react-icons/bs";
-import PortfolioCard from "../../ui/PortfolioCard";
 import MainLayout from "../../layouts/MainLayout";
 import useSeller from "../../features/profiles/useSeller";
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import useStats from "../../features/stats/useStats";
 import useSellerCategory from "../../features/categories/useSellerCategory";
 import useSellerImages from "../../features/profiles/useSellerImages";
+import PortfolioCard from "../../ui/PortfolioCard";
 import SplashScreen from "../../ui/SplashScreen";
 import NetworkError from "../../ui/NetworkError";
 
@@ -24,8 +25,8 @@ function SellerProfile() {
         error: categoryError,
         category,
     } = useSellerCategory();
-    // const { handleIncrementWhatsappClicks, handleIncrementProfileViews } =
-    //     useStats();
+    const { handleIncrementWhatsappClicks, handleIncrementProfileViews } =
+        useStats();
     const {
         loading: imagesLoading,
         error: imagesError,
@@ -45,9 +46,9 @@ function SellerProfile() {
         if (sellerInfo?.id) handleGetImages(sellerInfo.id);
     }, [sellerInfo?.id]);
 
-    // useEffect(() => {
-    //     if (sellerInfo?.id) handleIncrementProfileViews(sellerInfo.id);
-    // }, [sellerInfo?.id]);
+    useEffect(() => {
+        if (sellerInfo?.id) handleIncrementProfileViews(sellerInfo.id);
+    }, [sellerInfo?.id]);
 
     const handleChatClick = () => {
         if (sellerInfo?.id) handleIncrementWhatsappClicks(sellerInfo.id);
@@ -57,6 +58,12 @@ function SellerProfile() {
     if (sellerLoading || categoryLoading || imagesLoading) return <SplashScreen />;
     if (sellerError || categoryError || imagesError) return <NetworkError />;
     if (!sellerInfo || !category) return <p>Seller not found</p>;
+
+    const whatsappNumber = sellerInfo.whatsapp_number.replace(/\D/g, "");
+    const message = encodeURIComponent(
+        `Hi ${sellerInfo?.business_name}, I found you on Haple and I'm interested in your ${category?.catalog}!`
+    );
+
     return (
         <MainLayout>
             <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3 mb-10">
@@ -107,10 +114,17 @@ function SellerProfile() {
 
                 {/* cta */}
                 <div className="flex gap-1.5 lg:gap-2.5 items-center w-full lg:w-159.25">
-                    <button className="flex items-center justify-center gap-1.5 lg:gap-2.5 bg-secondary-200 text-white p-1.5 lg:p-2.5 rounded-md w-fit">
-                        <BsChat className="text-sm lg:text-lg" />
-                        <span className="lg:text-sm">Chat on Whatsapp</span>
-                    </button>
+                    <div>
+                        <a href={`https://wa.me/${whatsappNumber}?text=${message}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={handleChatClick}>
+                            <button className="flex items-center justify-center gap-1.5 lg:gap-2.5 bg-secondary-200 text-white p-1.5 lg:p-2.5 rounded-md w-fit">
+                                <BsChat className="text-sm lg:text-lg" />
+                                <span className="lg:text-sm">Chat on Whatsapp</span>
+                            </button>
+                        </a>
+                    </div>
                     {/* <button className="bg-neutral-400 p-1.5 lg:p-2.5 rounded-md flex-1">
                         <span className="lg:text-sm">Request service</span>
                     </button> */}

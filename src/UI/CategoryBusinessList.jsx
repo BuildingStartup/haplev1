@@ -6,6 +6,7 @@ import useSellersCategorySlug from "../features/profiles/useSellersCategorySlug"
 import useCategories from "../features/categories/useCategories";
 import NetworkError from "./NetworkError";
 import SpinnerDash from "./SpinnerDash";
+import HeaderOperations from "./HeaderOperations";
 
 function CategoryBusinessList(){
     const { catalog, slug } = useParams();    
@@ -38,7 +39,7 @@ function CategoryBusinessList(){
         }
     }, [catalog, slug]);
 
-    const NumOfSellers = sellers?.length;    
+        
     
     const [loadedImages, setLoadedImages] = useState({});
 
@@ -50,18 +51,28 @@ function CategoryBusinessList(){
     if (categoryError) return <NetworkError />
 
     const sortBy = searchParams.get("sortBy") || "latest";
+    let sortedSellers ;
+    
+    if(sortBy === "latest") sortedSellers = [...sellers].sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at) 
+        );
 
+    if(sortBy === "az") sortedSellers =[...sellers].sort((a, b) =>
+          a.business_name.localeCompare(b.business_name)
+        );
 
+    const NumOfSellers = sortedSellers?.length;
 
 
     return (            
-        <>
+        <div className="space-y-3">
+            <HeaderOperations NumOfSellers={NumOfSellers} />
             {NumOfSellers > 0 ? <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] lg:grid-cols-4 gap-2 md:gap-4">
-                {sellers.map((seller, index) => (
+                {sortedSellers.map((seller, index) => (
                     <div key={seller.id} className="rounded-xl lg:rounded-2xl overflow-hidden bg-white ">
                         <div className="relative h-25 lg:h-[219.98px]">
                             {seller.coverImage_url || seller.avatar_url ? (
-                                <>
+                            <>
                             <img src={seller.coverImage_url || seller.avatar_url} alt={seller.business_name} className={`w-full h-full object-cover transition-all duration-500 ${
                             loadedImages[seller.id] ? 'blur-0' : 'blur-md'
                             }`} 
@@ -93,7 +104,7 @@ function CategoryBusinessList(){
                 <p className="text-sm font-medium">No sellers found.</p>
             </div>
             }
-        </>
+        </div>
     )
 }
 

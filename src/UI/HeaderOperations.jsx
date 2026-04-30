@@ -1,21 +1,12 @@
-import { useState } from "react"
 import SortBy from "./SortBy"
-import Filter from "./Filter"
-
-function HeaderOperations() {
+function HeaderOperations({NumOfSellers}) {
     return (
-        <div className="flex items-center justify-between">            
-                <SortBy options={[
-                     { id: 'latest', label: 'Latest' },
-                     { id: 'popular', label: 'Popular' },
-                     { id: 'recommended', label: 'Recommended' },
-                ]} />
-
-                <Filter options={[
-                     { id: 'all', label: 'All' },
-                     { id: 'product', label: 'Product' },
-                     { id: 'service', label: 'Service' },
-                ]} />
+        <div className="flex items-center justify-between">  
+            <p className="text-neutral-100 lg:text-sm">{NumOfSellers} results</p> 
+            <SortBy options={[
+                { id: 'latest', label: 'Latest' },
+                { id: 'az', label: 'A-Z' },
+            ]} />         
         </div>
     )
 }

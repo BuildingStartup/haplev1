@@ -5,7 +5,7 @@ function useSeller(){
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [seller, setSeller] = useState(null);
-    const [sellers, setSellers] = useState(null);
+    const [sellers, setSellers] = useState([]);
 
     const fetchSellerById = useCallback(async (id) => {
         setLoading(true);
@@ -54,8 +54,8 @@ function useSeller(){
         finally {
             setLoading(false);
         }
+        
     }, []);
-
     
     return {loading, error, seller, fetchSellerById, fetchSellerByUsername, sellers, fetchAllSellers};
 }

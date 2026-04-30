@@ -17,21 +17,11 @@ import CategoryBusinessList from "../../ui/CategoryBusinessList";
 export default function AllSellers() {
   const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
   const { loading: categoriesLoading, categories, getAllCategories, error: categoryError } = useCategories();
-  const {loading: sellersLoading, sellers, fetchAllSellers} = useSeller();
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-        const fetchData = async ()=> {
-            try{
-                fetchAllSellers();
-                getAllCategories();
-            }
-            catch(err){
-                console.log("Batch Failed: ", err);
-            }
-        }
-        fetchData();
-    }, []);
+    getAllCategories();
+  }, []);
 
   const handleSearch = (searchQuery) => {
     setQuery(searchQuery);
@@ -41,7 +31,7 @@ export default function AllSellers() {
   
 
   // Show loading spinner while fetching categories or sellers
-  if (sellersLoading || categoriesLoading) return <SplashScreen />;
+  if (categoriesLoading) return <SplashScreen />;
   if (categoryError || searchError) return <NetworkError />;
   return (
     <MainLayout>
@@ -53,8 +43,7 @@ export default function AllSellers() {
               <h1 className="capitalize text-xl lg:text-3xl font-medium">/Sellers</h1>
             </div>
             <OtherCategoriesList categories={categories} />
-            <CategoryBusinessList sellers={sellers} />
-            {/* <SellersBusinessList sellers={sellers} /> */}
+            <SellersBusinessList />
           </main>
     </MainLayout>
   );

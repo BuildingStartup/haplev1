@@ -10,15 +10,13 @@ import useSearchSeller from "../../features/profiles/useSearchSeller";
 import NetworkError from "../../ui/NetworkError";
 import MainLayout from "../../layouts/MainLayout";
 import CategoryBusinessList from "../../ui/CategoryBusinessList";
-import CategoriesList from "../../ui/CategoriesList";
 import OtherCategoriesList from "../../ui/OtherCategoriesList";
-import Dropdown from "../../ui/SortBy";
 import HeaderOperations from "../../ui/HeaderOperations";
 
 
 
 export default function CategorySellers() {
-  const { catalog, slug } = useParams();  
+  const { slug } = useParams();  
   const { loading: categoriesLoading, categories, getAllCategories, error: categoriesError } = useCategories();
   const [query, setQuery] = useState("");
 
@@ -40,11 +38,8 @@ export default function CategorySellers() {
           <h1 className="capitalize text-xl lg:text-3xl font-medium">/{slug}</h1>
         </div>
 
-        <OtherCategoriesList categories={categories} />
-        <div className="space-y-3">          
-          <HeaderOperations />
-          <CategoryBusinessList />
-        </div>
+        <OtherCategoriesList categories={categories} />  
+        <CategoryBusinessList />
 
       </main>
     </MainLayout>

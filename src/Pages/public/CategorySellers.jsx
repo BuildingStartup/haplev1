@@ -12,56 +12,41 @@ import MainLayout from "../../layouts/MainLayout";
 import CategoryBusinessList from "../../ui/CategoryBusinessList";
 import CategoriesList from "../../ui/CategoriesList";
 import OtherCategoriesList from "../../ui/OtherCategoriesList";
+import Dropdown from "../../ui/SortBy";
+import HeaderOperations from "../../ui/HeaderOperations";
 
 
 
 export default function CategorySellers() {
-  const { catalog, slug } = useParams();
-  const { loading: categoryLoading, getCategoryByCatalogAndSlug } = useCategories();
-  const { loading: categoriesLoading, categories, getAllCategories, error: categoryError } = useCategories();
-  const { loading: sellersLoading, sellers, fetchSellersById } = useSellersCategorySlug();
-  const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
+  const { catalog, slug } = useParams();  
+  const { loading: categoriesLoading, categories, getAllCategories, error: categoriesError } = useCategories();
   const [query, setQuery] = useState("");
-
-  const handleSearch = (searchQuery) => {
-    setQuery(searchQuery);
-    performSearch(searchQuery);
-  };
 
   // Fetch category and then sellers
   useEffect(() => {
-    async function fetchData() {
-      try {
-        await getAllCategories();
-        const category = await getCategoryByCatalogAndSlug(catalog, slug);
-        if (category?.id) {
-          fetchSellersById(category.id);
-        }
-      } catch (err) {
-        console.error("Error fetching category:", err);
-      }
-    }
-    
-    if (catalog && slug) {
-      fetchData();
-    }
-  }, [catalog, slug]);
+      getAllCategories();
+}, []);
 
   // Show loading spinner while fetching categories or sellers
-  if (categoryLoading || sellersLoading || categoriesLoading) return <SplashScreen />;
-  if(categoryError) return <NetworkError />
+  if (categoriesLoading) return <SplashScreen />;
+  if (categoriesError) return <NetworkError />
   return (
     <MainLayout>
-          <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">
-            <div className="flex items-center">
-              <Link to="/">
-                <GoHome className="text-lg lg:text-xl hover:text-primary-light" />
-              </Link>
-              <h1 className="capitalize text-xl lg:text-3xl font-medium">/{slug}</h1>
-            </div>
-            <OtherCategoriesList categories={categories} />
-            <CategoryBusinessList />
-          </main>
+      <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">
+        <div className="flex items-center">
+          <Link to="/">
+            <GoHome className="text-lg lg:text-xl hover:text-primary-light" />
+          </Link>
+          <h1 className="capitalize text-xl lg:text-3xl font-medium">/{slug}</h1>
+        </div>
+
+        <OtherCategoriesList categories={categories} />
+        <div className="space-y-3">          
+          <HeaderOperations />
+          <CategoryBusinessList />
+        </div>
+
+      </main>
     </MainLayout>
   );
 }

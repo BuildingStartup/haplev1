@@ -10,10 +10,11 @@ import MainLayout from "../../layouts/MainLayout";
 import OtherCategoriesList from "../../ui/OtherCategoriesList";
 import useSeller from "../../features/profiles/useSeller";
 import SellersBusinessList from "../../ui/SellersBusinessList";
+import CategoryBusinessList from "../../ui/CategoryBusinessList";
 
 
 
-export default function CategorySellers() {
+export default function AllSellers() {
   const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
   const { loading: categoriesLoading, categories, getAllCategories, error: categoryError } = useCategories();
   const {loading: sellersLoading, sellers, fetchAllSellers} = useSeller();
@@ -52,7 +53,8 @@ export default function CategorySellers() {
               <h1 className="capitalize text-xl lg:text-3xl font-medium">/Sellers</h1>
             </div>
             <OtherCategoriesList categories={categories} />
-            <SellersBusinessList />
+            <CategoryBusinessList sellers={sellers} />
+            {/* <SellersBusinessList sellers={sellers} /> */}
           </main>
     </MainLayout>
   );

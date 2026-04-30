@@ -32,7 +32,7 @@ export default function ViewProducts({products, handleDelete, isDeleting}){
                   >
                     <button
                       onClick={() => handleDeleteClick(prod.id)}
-                      className="absolute top-3 lg:top-5 right-3 lg:right-5 cursor-pointer z-10"
+                      className="absolute top-3 lg:top-5 right-3 lg:right-5 cursor-pointer z-10 bg-white/90 p-1 rounded-full backdrop-blur-md"
                       disabled={isDeleting}
                     >
                       <GoTrash className="text-secondary-300 text-base lg:text-lg" />

@@ -1,21 +1,23 @@
+import { lazy } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Applayout from "./ui/Applayout"
-
-import Homepage from "./pages/public/Homepage"
-import SellerProfile from "./pages/public/SellerProfile"
-import Login from "./pages/public/Login.jsx";
-import SignUp from "./pages/public/SignUp.jsx";
-
-import ProtectedRoute from "./ui/ProtectedRoute.jsx";
-import ResetPassword from "./pages/public/ResetPassword.jsx"
-
-import Error404 from "./ui/Error404.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx";
+
+import Applayout from "./ui/Applayout"
+import Homepage from "./pages/public/Homepage"
+import Error404 from "./ui/Error404.jsx"
+import ProtectedRoute from "./ui/ProtectedRoute.jsx";
+
+
+const Login = lazy(() => import("./pages/public/Login.jsx"));
+const SellerProfile = lazy(() => import("./pages/public/SellerProfile.jsx"));
+const SignUp = lazy(() => import("./pages/public/SignUp.jsx"));
+const ResetPassword = lazy(() => import("./pages/public/ResetPassword.jsx"));
+const UpdatePassword = lazy(() => import("./pages/public/updatePassword.jsx"));
+const CategorySellers = lazy(() => import("./pages/public/CategorySellers.jsx"));
+const AllSellers = lazy(() => import("./pages/public/AllSellers.jsx"));
+
 import DashLayout from "./layouts/DashLayout.jsx";
-import UpdatePassword from "./pages/public/updatePassword.jsx";
-import CategorySellers from "./pages/public/CategorySellers.jsx";
-import AllSellers from "./pages/public/AllSellers.jsx";
 
 function App() {
   return (

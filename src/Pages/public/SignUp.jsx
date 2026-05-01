@@ -4,8 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import Fields from "../../ui/Fields";
 import AuthLayout from "../../layouts/AuthLayout";
 import SignUpForm from "../../features/authentication/SignUpForm";
-export default function SignUp() {
 
+export default function SignUp() {
   
   return (
     <AuthLayout>

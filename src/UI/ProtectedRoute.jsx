@@ -10,8 +10,7 @@ function ProtectedRoute({children}){
 
     useEffect(()=>{
         loadUser();
-    }, []);
-    
+    }, []);    
    
 
     //2. while loading, show a splashscreen

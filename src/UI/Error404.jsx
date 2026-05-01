@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 export default function Error404() {
   return (
     <section className="h-screen flex flex-col items-center justify-center">

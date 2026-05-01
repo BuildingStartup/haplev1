@@ -4,6 +4,7 @@ import AuthLayout from "../../layouts/AuthLayout";
 import SpinnerMini from "../../ui/SpinnerMini";
 import useForgotPassword from "../../features/authentication/useForgotPassword";
 
+
 export default function ResetPassword() {
   const {loading, ForgotPassword: resetLink} = useForgotPassword(); 
     const {

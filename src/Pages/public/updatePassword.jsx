@@ -5,6 +5,7 @@ import useResetPassword from "../../features/authentication/useResetPassword";
 import AuthLayout from "../../layouts/AuthLayout";
 import Fields from "../../ui/Fields";
 
+
 export default function UpdatePassword(){
     const [showPassword, setShowPassword] = useState(false);
     const {loading, resetPassword} = useResetPassword();

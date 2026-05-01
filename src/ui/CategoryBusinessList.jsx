@@ -70,7 +70,7 @@ function CategoryBusinessList(){
             {NumOfSellers > 0 ? <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] lg:grid-cols-4 gap-2 md:gap-4">
                 {sortedSellers.map((seller, index) => (
                     <div key={seller.id} className="rounded-xl lg:rounded-2xl overflow-hidden bg-white ">
-                        <div className="relative h-25 lg:h-[219.98px]">
+                        <div className="relative h-40 lg:h-[219.98px]">
                             {seller.coverImage_url || seller.avatar_url ? (
                             <>
                             <img src={seller.coverImage_url || seller.avatar_url} alt={seller.business_name} className={`w-full h-full object-cover transition-all duration-500 ${

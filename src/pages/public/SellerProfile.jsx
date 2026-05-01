@@ -7,7 +7,7 @@ import useSeller from "../../features/profiles/useSeller";
 import useStats from "../../features/stats/useStats";
 import useSellerCategory from "../../features/categories/useSellerCategory";
 import useSellerImages from "../../features/profiles/useSellerImages";
-import PortfolioCard from "../../ui/PortfolioCard";
+import PortfolioCard from "../../ui/PortfolioCard.jsx"
 import SplashScreen from "../../ui/SplashScreen";
 import NetworkError from "../../ui/NetworkError";
 
@@ -101,7 +101,7 @@ function SellerProfile() {
 
                 <div className="bg-white space-y-1 lg:space-y-3.5 p-2 lg:px-10 lg:py-8 rounded-xl lg:rounded-2xl">
                     <h2 className="text-lg lg:text-xl font-medium">Portfolio</h2>
-                    { sellerImages.length > 0 ? <div className="grid grid-flow-col auto-cols-[150px] lg:auto-cols-[264px] gap-2.5 no-scrollbar overflow-x-auto">
+                    { sellerImages.length > 0 ? <div className="grid grid-flow-col auto-cols-[180px] lg:auto-cols-[264px] gap-2.5 no-scrollbar overflow-x-auto">
                         {sellerImages.map((item, index)=> (
                             <PortfolioCard sellerInfo={sellerInfo} key={item.id} item={item}/>
                         ))}

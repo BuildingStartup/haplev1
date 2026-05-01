@@ -45,7 +45,7 @@ function BusinessList({categories, filterValue}) {
         <div className="grid grid-flow-col auto-cols-[240px] lg:auto-cols-[389px] gap-4 no-scrollbar overflow-x-auto">
                 {filteredSellers.map((seller, index) => (
                 <div key={seller.id} className="rounded-xl lg:rounded-2xl overflow-hidden bg-white ">
-                <div className="relative h-25 lg:h-[219.98px]">
+                <div className="relative h-40 lg:h-[219.98px]">
                     {seller.coverImage_url || seller.avatar_url ? (
                     <>
                     <img src={seller.coverImage_url || seller.avatar_url} alt={seller.business_name} className={`w-full h-full object-cover transition-all duration-500 ${

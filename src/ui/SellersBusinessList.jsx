@@ -74,7 +74,7 @@ function SellersBusinessList(){
                         <div className="p-2 space-y-1 lg:p-6 lg:space-y-2">
                             <div className="flex justify-between items-center">
                                 <h3 className="text-sm lg:text-lg font-medium line-clamp-1">{seller.business_name}</h3>
-                                <img src="../checkIcon.svg" alt="verified" />
+                                {/* <img src="../checkIcon.svg" alt="verified" /> */}
                             </div>
                             <p className="lg:text-base text-neutral-100 line-clamp-1 ">{seller.description}</p>
                             <Link to={`/${seller.username}`}>

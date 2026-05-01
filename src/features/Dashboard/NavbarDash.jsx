@@ -1,6 +1,5 @@
 import { GoSearch } from "react-icons/go";
 import { IoNotificationsOutline, IoReorderThreeOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
 
 function NavbarDash({setIsOpen, sellerInfo}) {
     const initials = (sellerInfo?.business_name || "?").slice(0, 2).toUpperCase();
@@ -8,10 +7,7 @@ function NavbarDash({setIsOpen, sellerInfo}) {
         <div className="flex justify-between items-center lg:justify-end">
 
             <div className="flex items-center gap-1 lg:hidden">
-                <IoReorderThreeOutline className="text-2xl" onClick={setIsOpen} />
-                <Link to="/">
-                    <img src="../logo.svg" alt="logo" className="w-15" />
-                </Link>
+                <IoReorderThreeOutline className="text-2xl cursor-pointer" onClick={setIsOpen} />
             </div>
            <div className="flex gap-2 lg:gap-4 items-center">
                 <div className="p-2">

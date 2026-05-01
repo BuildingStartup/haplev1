@@ -10,7 +10,7 @@ export default function Login() {
         className="flex lg:items-center justify-center"
       >
         
-        <section className="flex w-full px-3 lg:px-0 lg:w-fit lg:justify-center">
+        <section className="flex w-full px-3 lg:px-0 lg:w-fit lg:justify-center lg:shadow-md rounded-2xl">
 
         {/* Login Image */}
         <div className="flex-1 hidden lg:block relative">
@@ -38,7 +38,7 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="flex-1 bg-white space-y-1 lg:space-y-3 rounded-lg lg:rounded-r-2xl px-4 py-10 lg:p-10">          
+        <div className="flex-1 bg-white space-y-1 lg:space-y-3 rounded-lg lg:rounded-r-2xl px-4 py-10 shadow-md lg:shadow-none lg:p-10">          
           <div className="text-center lg:text-left space-y-0.5 lg:space-y-1 mb-3 lg:mb-7">
             <h1 className="text-stroke-100 font-bold text-2xl lg:text-3xl capitalize">
               Welcome Back
@@ -52,7 +52,7 @@ export default function Login() {
           <p className="text-center text-neutral-100 text-xs mt-4">
               Don't have an account?{" "}
               <Link to="/signUp">
-                <span className="text-primary font-medium">Sign up</span>
+                <span className="text-primary font-medium hover:underline">Sign up</span>
               </Link>
           </p>
         </div>

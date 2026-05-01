@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 import { BsChat } from "react-icons/bs";
 import MainLayout from "../../layouts/MainLayout";
@@ -53,6 +53,17 @@ function SellerProfile() {
     const handleChatClick = () => {
         if (sellerInfo?.id) handleIncrementWhatsappClicks(sellerInfo.id);
     };
+
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        // Check if there is history to go back to within the app
+        if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+        } else {
+        navigate('/', { replace: true });
+        }
+    };
    
 
     if (sellerLoading || categoryLoading || imagesLoading) return <SplashScreen />;
@@ -67,12 +78,10 @@ function SellerProfile() {
     return (
         <MainLayout>
             <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3 mb-10">
-                <Link to="/">
-                    <div className="flex items-center gap-1 text-neutral-500">
-                        <GoArrowLeft />
-                        <span>Back to Homepage</span>
-                    </div>
-                </Link>
+                <button onClick={handleBack} className="flex items-center gap-1 text-neutral-100">
+                    <GoArrowLeft />
+                    <span>Back</span>
+                </button>
                 <div className="mt-4 relative h-40 lg:h-80">
                     {sellerInfo.coverImage_url ? (
                     <img src={sellerInfo?.coverImage_url} alt="seller banner" className="h-full w-full object-cover rounded-lg" />
@@ -81,7 +90,7 @@ function SellerProfile() {
                             <div className="text-xl lg:text-3xl font-bold tracking-widest text-primary">{sellerInfo?.business_name}</div>
                         </div>
                     )}
-                    <span className="absolute py-1 px-4 text-xs lg:py-1.75 lg:px-7 font-medium rounded-full inset-ring inset-ring-white top-2 lg:top-6 left-2 lg:left-7 capitalize bg-white/60 backdrop-blur-md">{category?.name}</span>
+                    <span className="absolute py-1 px-4 text-xs lg:py-1.75 lg:px-7 font-medium rounded-full top-2 lg:top-6 left-2 lg:left-7 capitalize bg-white/60 backdrop-blur-md">{category?.name}</span>
                     <div className="absolute -bottom-7 lg:-bottom-15 left-7 lg:left-21.5 rounded-full overflow-hidden w-15 h-15 lg:w-40 lg:h-40 ring ring-primary flex items-center justify-center bg-white">
                         { sellerInfo.avatar_url ? (
                         <img src={sellerInfo.avatar_url} alt="seller logo" className="w-full h-full object-cover" />
@@ -101,7 +110,7 @@ function SellerProfile() {
 
                 <div className="bg-white space-y-1 lg:space-y-3.5 p-2 lg:px-10 lg:py-8 rounded-xl lg:rounded-2xl">
                     <h2 className="text-lg lg:text-xl font-medium">Portfolio</h2>
-                    { sellerImages.length > 0 ? <div className="grid grid-flow-col auto-cols-[180px] lg:auto-cols-[264px] gap-2.5 no-scrollbar overflow-x-auto">
+                    { sellerImages.length > 0 ? <div className="grid grid-flow-col auto-cols-[200px] lg:auto-cols-[264px] gap-2.5 no-scrollbar overflow-x-auto">
                         {sellerImages.map((item, index)=> (
                             <PortfolioCard sellerInfo={sellerInfo} key={item.id} item={item}/>
                         ))}

@@ -1,14 +1,12 @@
 import { VscError } from "react-icons/vsc";
 import Fields from "../../ui/Fields";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import useCategories from "../categories/useCategories";
+import { useState } from "react";
 import useSignUp from "../authentication/useSignUp";
 import SpinnerMini from "../../ui/SpinnerMini";
 
-function SignUpForm() {
+function SignUpForm({categories}) {
   const { loading: signupLoading, handleSignUp } = useSignUp();
-  const { categories, getAllCategories, loading:categoryLoading } = useCategories();
     const {
         register,
         handleSubmit,
@@ -44,10 +42,6 @@ function SignUpForm() {
       return category?.id;
     };
 
-
-    useEffect(() => {
-      getAllCategories();
-    }, []);
 
     const onSubmit = (data) => {
       if (!data.email || !data.password) return;
@@ -86,7 +80,6 @@ function SignUpForm() {
       setValue("whatsapp", cleanedNumber);
     };
 
-    if(categoryLoading) return <p>loading...</p>
     return (
         <form
           onSubmit={handleSubmit(onSubmit)}

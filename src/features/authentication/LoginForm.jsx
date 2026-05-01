@@ -73,7 +73,7 @@ function LoginForm() {
 
             <button
               type="submit"
-              className="mt-3 lg:mt-6 bg-primary text-white w-full py-2 lg:py-3 rounded lg:rounded-xl text-sm font-medium shadow-lg flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:bg-neutral-100/70"
+              className="mt-3 lg:mt-6 bg-primary text-white w-full py-2 lg:py-3 rounded lg:rounded-xl text-sm font-medium shadow-lg flex items-center justify-center gap-2 cursor-pointer hover:bg-primary-light transition duration-200 disabled:cursor-not-allowed disabled:bg-neutral-100/70"
               disabled={loading}
             > 
               {loading && <SpinnerMini />}

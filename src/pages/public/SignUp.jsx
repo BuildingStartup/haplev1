@@ -1,11 +1,18 @@
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import Fields from "../../ui/Fields";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthLayout from "../../layouts/AuthLayout";
 import SignUpForm from "../../features/authentication/SignUpForm";
+import useCategories from "../../features/categories/useCategories";
+import SplashScreen from "../../ui/SplashScreen";
 
 export default function SignUp() {
+  const { categories, getAllCategories, loading:categoryLoading } = useCategories()
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  if(categoryLoading) return <SplashScreen />
   
   return (
     <AuthLayout>
@@ -21,7 +28,7 @@ export default function SignUp() {
           </p>
         </div>
 
-        <SignUpForm />
+        <SignUpForm categories={categories} />
 
         <p className="text-center text-neutral-100 mb-3">
           Already have an account?{" "}

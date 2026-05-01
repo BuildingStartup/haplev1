@@ -3,8 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
-import Applayout from "./ui/Applayout"
-import Homepage from "./pages/public/Homepage"
+import Applayout from "./ui/Applayout.jsx"
+import Homepage from "./pages/public/Homepage.jsx"
 import Error404 from "./ui/Error404.jsx"
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 

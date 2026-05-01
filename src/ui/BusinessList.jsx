@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
-import useSeller from "../features/profiles/useSeller";
-import SplashScreen from "./SplashScreen";
-import NetworkError from "./NetworkError";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function BusinessList({categories, filterValue}) {
-    const {loading: sellersLoading, sellers, fetchAllSellers, sellersError} = useSeller();
-    const [categoryNames, setCategoryNames] = useState([]);
-
+function BusinessList({sellers, categories, filterValue}) {
     const [loadedImages, setLoadedImages] = useState({});
 
     const handleImageLoad = (id) => {
         setLoadedImages(prev => ({ ...prev, [id]: true }));
     };
-    
-    useEffect(() => {
-        fetchAllSellers();
-    }, []);
-
-    if (sellersLoading) return <SplashScreen />;
-    if (sellersError) return <NetworkError />;
 
     const filteredSellers = sellers
     .filter((seller) => {

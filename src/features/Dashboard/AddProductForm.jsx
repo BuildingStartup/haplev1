@@ -221,8 +221,8 @@ export default function AddProductForm({
                   {/* Per-image metadata */}
                   <div className="space-y-3">
                     {newProducts.map((item, index) => (
-                      <>
-                      <div key={`${item.preview}-${index}`} className="bg-white p-3 rounded ring ring-stone-200 space-y-2">
+                      <div key= {`${item.preview}-${index}`}>
+                      <div className="bg-white p-3 rounded ring ring-stone-200 space-y-2">
                         <div className="flex items-start gap-3">
 
                           <img
@@ -303,7 +303,7 @@ export default function AddProductForm({
                             className=" object-cover rounded w-full"
                           />
                       </Modal.Preview>  
-                    </>
+                    </div>
                     ))}
                   </div>
         

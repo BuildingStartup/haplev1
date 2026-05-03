@@ -2,19 +2,18 @@ import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import useSearchSeller from "../features/profiles/useSearchSeller";
-import useCategories from "../features/categories/useCategories";
 import NetworkError from "./NetworkError";
 import SpinnerDash from "./SpinnerDash";
 import HeaderOperations from "./HeaderOperations";
 import useSeller from "../features/profiles/useSeller";
-import useSellersCategorySlug from "../features/profiles/useSellersCategorySlug";
 
 function SellersBusinessList(){   
     const { catalog, slug } = useParams();    
     const [searchParams] = useSearchParams();
     const { loading: sellersLoading, sellers, fetchAllSellers, error: sellersError} = useSeller();
     const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
-    const [query, setQuery] = useState("");
+
+    const searchQuery = searchParams.get("searchQuery") || "";
 
     const handleSearch = (searchQuery) => {
         setQuery(searchQuery);
@@ -25,6 +24,10 @@ function SellersBusinessList(){
     useEffect(() => {
         fetchAllSellers();
     }, []);
+
+    useEffect(()=> {
+        if(searchQuery) performSearch(searchQuery);        
+    }, [searchQuery]);
         
     
     const [loadedImages, setLoadedImages] = useState({});
@@ -33,17 +36,24 @@ function SellersBusinessList(){
         setLoadedImages(prev => ({ ...prev, [id]: true }));
     };
 
-    if (sellersLoading ) return <SpinnerDash />;
-    if (sellersError) return <NetworkError />
+    
+    
+    if (sellersLoading || searchLoading ) return <SpinnerDash />;
+    if (sellersError || searchError) return <NetworkError />
 
+    
+    
+    const dataSource = (searchSellers && searchSellers.length > 0) 
+    ? searchSellers 
+    : sellers;
     const sortBy = searchParams.get("sortBy") || "latest";
     let sortedSellers ;
     
-    if(sortBy === "latest") sortedSellers = [...sellers].sort(
+    if(sortBy === "latest") sortedSellers = [...dataSource].sort(
             (a, b) => new Date(b.created_at) - new Date(a.created_at) 
         );
 
-    if(sortBy === "az") sortedSellers =[...sellers].sort((a, b) =>
+    if(sortBy === "az") sortedSellers =[...dataSource].sort((a, b) =>
           a.business_name.localeCompare(b.business_name)
         );
 

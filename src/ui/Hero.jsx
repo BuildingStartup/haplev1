@@ -1,4 +1,4 @@
-import { GoSearch } from "react-icons/go";
+import Search from "./Search";
 function Hero() {
     return (
         <div className=" bg-linear-to-r from-primary to-primary-dark py-4 px-2 flex justify-center items-center rounded-xl relative overflow-hidden shadow-lg lg:p-16">
@@ -12,13 +12,7 @@ function Hero() {
                     Discover student businesses, connect via Whatsapp and get what you need fast
                 </p>
 
-                <form className="flex justify-between items-center gap-2 bg-white w-fit mx-auto rounded-full py-1 px-1 lg:p-2 lg:w-md">
-                    <div className="flex items-center gap-1 flex-1 px-3 lg:gap-3">
-                        <GoSearch className="lg:text-lg" />
-                        <input type="text" className="w-full outline-0 focus-0 py-1 lg:py-2 lg:text-base" placeholder="Search for hair food, or design&hellip;"/>
-                    </div>
-                    <button type="submit" className="bg-primary text-white py-1 px-3 rounded-full lg:py-2 lg:px-5">Search</button>
-                </form>
+                <Search />
 
             </div>
             <div className="w-20 h-20 bg-neutral-100 absolute -bottom-10 -right-10 lg:-bottom-8 lg:-right-8 lg:w-35 lg:h-35 rounded-full blur-lg opacity-15"></div>

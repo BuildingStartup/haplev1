@@ -3,7 +3,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import { GoHome, GoSearch } from "react-icons/go";
 import SplashScreen from "../../ui/SplashScreen";
 import useCategories from "../../features/categories/useCategories";
-import useSearchSeller from "../../features/profiles/useSearchSeller";
 import NetworkError from "../../ui/NetworkError";
 import MainLayout from "../../layouts/MainLayout";
 import OtherCategoriesList from "../../ui/OtherCategoriesList";
@@ -11,7 +10,6 @@ import SellersBusinessList from "../../ui/SellersBusinessList";
 
 
 export default function AllSellers() {
-  const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
   const { loading: categoriesLoading, categories, getAllCategories, error: categoryError } = useCategories();
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
@@ -31,7 +29,7 @@ export default function AllSellers() {
 
   // Show loading spinner while fetching categories or sellers
   if (categoriesLoading) return <SplashScreen />;
-  if (categoryError || searchError) return <NetworkError />;
+  if (categoryError) return <NetworkError />;
   return (
     <MainLayout>
           <main className="space-y-8 px-4 py-2 lg:px-12 lg:py-3">

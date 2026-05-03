@@ -15,11 +15,7 @@ function SellersBusinessList(){
 
     const searchQuery = searchParams.get("searchQuery") || "";
 
-    const handleSearch = (searchQuery) => {
-        setQuery(searchQuery);
-        performSearch(searchQuery);
-    };
-
+   
     // Fetch category and then sellers
     useEffect(() => {
         fetchAllSellers();

@@ -15,12 +15,9 @@ function CategoryBusinessList(){
     const { loading: sellersLoading, sellers, fetchSellersById } = useSellersCategorySlug();
     const { loading: searchLoading, error: searchError, sellers: searchSellers, searchSellers: performSearch } = useSearchSeller();
     const [query, setQuery] = useState("");
+    const searchQuery = searchParams.get("searchQuery") || "";
 
-    const handleSearch = (searchQuery) => {
-        setQuery(searchQuery);
-        performSearch(searchQuery);
-    };
-
+    
     // Fetch category and then sellers
     useEffect(() => {
         async function fetchData() {
@@ -39,6 +36,10 @@ function CategoryBusinessList(){
         }
     }, [catalog, slug]);
 
+    useEffect(()=> {
+        if(searchQuery) performSearch(searchQuery);        
+    }, [searchQuery]);
+
         
     
     const [loadedImages, setLoadedImages] = useState({});
@@ -47,17 +48,21 @@ function CategoryBusinessList(){
         setLoadedImages(prev => ({ ...prev, [id]: true }));
     };
 
-    if (categoryLoading || sellersLoading ) return <SpinnerDash />;
-    if (categoryError) return <NetworkError />
+    if (categoryLoading || sellersLoading || searchLoading ) return <SpinnerDash />;
+    if (categoryError || searchError) return <NetworkError />
+
+    const dataSource = (searchSellers && searchSellers.length > 0) 
+    ? searchSellers 
+    : sellers;
 
     const sortBy = searchParams.get("sortBy") || "latest";
     let sortedSellers ;
     
-    if(sortBy === "latest") sortedSellers = [...sellers].sort(
+    if(sortBy === "latest") sortedSellers = [...dataSource].sort(
             (a, b) => new Date(b.created_at) - new Date(a.created_at) 
         );
 
-    if(sortBy === "az") sortedSellers =[...sellers].sort((a, b) =>
+    if(sortBy === "az") sortedSellers =[...dataSource].sort((a, b) =>
           a.business_name.localeCompare(b.business_name)
         );
 

@@ -1,6 +1,8 @@
-import { lazy } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { lazy, useEffect } from "react";
+import { Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react"
+import ReactGA from "react-ga4";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 import Applayout from "./ui/Applayout.jsx"
@@ -19,10 +21,34 @@ const AllSellers = lazy(() => import("./pages/public/AllSellers.jsx"));
 
 import DashLayout from "./layouts/DashLayout.jsx";
 
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
+const IS_PRODUCTION = import.meta.env.PROD;
+
+function GoogleAnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!IS_PRODUCTION || !GA_MEASUREMENT_ID) return;
+
+    ReactGA.send({
+      hitType: "pageview",
+      page: `${location.pathname}${location.search}${location.hash}`,
+    });
+  }, [location]);
+
+  return null;
+}
+
 function App() {
+  useEffect(() => {
+    if (!IS_PRODUCTION || !GA_MEASUREMENT_ID) return;
+    ReactGA.initialize(GA_MEASUREMENT_ID);
+  }, []);
   return (
     <>
       <BrowserRouter>
+      {IS_PRODUCTION && <Analytics />}
+      <GoogleAnalyticsTracker />
       <AuthProvider>
         <Routes>
           <Route element={<Applayout />}>

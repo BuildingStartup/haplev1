@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { FaImage } from "react-icons/fa";
 import imageCompression from "browser-image-compression";
 import SpinnerMini from "../../ui/SpinnerMini";
@@ -25,22 +25,30 @@ export default function AddProductForm({
   const isProductUploadBusy = isSubmittingProduct || isUploading;
 
   const handleSelectImages = (e) => {
-    const files = Array.from(e.target.files || []);
-    if (!files.length) return;
+    setTimeout(()=> {
+
+      const fileList = e.target.files;
+      
+      if (!fileList || fileList.length === 0) {
+        console.log("No files detected");
+        return;
+      }
+      
+      const files = [...fileList];
 
     const MAX_FILE_SIZE = 11 * 1024 * 1024;
     const remainingSlots = Math.max(0, 4 - images.length - newProducts.length);
     const selectedFiles = files.slice(0, remainingSlots);
-
+    
     const validItems = [];
     let hasLargeFile = false;
-
+    
     selectedFiles.forEach((file) => {
       if (file.size > MAX_FILE_SIZE) {
         hasLargeFile = true;
         return;
       }
-
+      
       validItems.push({
         file,
         preview: URL.createObjectURL(file),
@@ -48,7 +56,7 @@ export default function AddProductForm({
         caption: "",
       });
     });
-
+    
     setNewProducts((prev) => [...prev, ...validItems]);
     setErrors((prev) => {
       const next = { ...prev };
@@ -60,9 +68,12 @@ export default function AddProductForm({
       }
       return next;
     });
-
+    
     // Allow selecting the same file again after removing it.
-    e.target.value = "";
+    setTimeout(()=> {
+      e.target.value = "";
+    }, 100)
+  }, 0)
   };
 
   const handleProductFieldChange = (index, field, value) => {
@@ -221,7 +232,7 @@ export default function AddProductForm({
                   {/* Per-image metadata */}
                   <div className="space-y-3">
                     {newProducts.map((item, index) => (
-                      <div key= {`${item.preview}-${index}`}>
+                      <Fragment key={`${item.preview}-${index}`}>
                       <div className="bg-white p-3 rounded ring ring-stone-200 space-y-2">
                         <div className="flex items-start gap-3">
 
@@ -300,10 +311,10 @@ export default function AddProductForm({
                           <img
                             src={item.preview}
                             alt={`Selected listing ${index + 1}`}
-                            className=" object-cover rounded w-full"
+                            className="object-cover rounded w-70 lg:w-100 mx-auto"
                           />
                       </Modal.Preview>  
-                    </div>
+                    </Fragment>
                     ))}
                   </div>
         

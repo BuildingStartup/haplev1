@@ -11,6 +11,7 @@ function useForgotPassword(){
     async function ForgotPassword(email){
         setLoading(true);
         setError(null);
+        console.log("VITE_SITE_URL:", import.meta.env.VITE_SITE_URL);
         const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" ? window.location.origin : "");
         const redirectPath = `${siteUrl}/updatePassword`;
         try{

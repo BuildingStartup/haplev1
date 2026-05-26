@@ -64,6 +64,7 @@ export async function getCurrentUser(){
 
 
 export async function forgotPassword(email, redirectPath){
+    console.log("redirectPath used for Supabase:", redirectPath); // Add this line
     const { error } = await supabase.auth.resetPasswordForEmail(
         email,
         {

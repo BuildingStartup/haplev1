@@ -11,7 +11,7 @@ function useForgotPassword(){
     async function ForgotPassword(email){
         setLoading(true);
         setError(null);
-        const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
+        const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== "undefined" ? window.location.origin : "");
         const redirectPath = `${siteUrl}/updatePassword`;
         try{
             await apiForgotPassword(email, redirectPath)

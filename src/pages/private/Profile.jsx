@@ -43,7 +43,7 @@ function Profile({sellerInfo, loading, error}) {
     if (sellerInfo?.id) handleGetImages(sellerInfo.id);
   }, [sellerInfo?.id]);
 
-  // Products selected for upload (max 4 in total catalog)
+  // Products selected for upload (max 7 in total catalog)
   const [newProducts, setNewProducts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [errors, setErrors] = useState({});
@@ -88,7 +88,7 @@ function Profile({sellerInfo, loading, error}) {
   if (error || categoryError || imageError) return <NetworkError />;
   if (!sellerInfo) return <p>No seller data found</p>;
 
-  const remaining = 4 - images.length;  
+  const remaining = 7 - images.length;
 
     return (
         // <DashLayout>
@@ -130,7 +130,7 @@ function Profile({sellerInfo, loading, error}) {
                         setNewProducts={setNewProducts}
                         handleCancel={handleCancel}
                         sellerInfo={sellerInfo}
-                        remaining={Math.max(0, 4 - images.length - newProducts.length)}
+                        remaining={Math.max(0, 7 - images.length - newProducts.length)}
                     />
 
                     <AddProductButton

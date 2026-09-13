@@ -37,7 +37,7 @@ export default function AddProductForm({
       const files = [...fileList];
 
     const MAX_FILE_SIZE = 11 * 1024 * 1024;
-    const remainingSlots = Math.max(0, 4 - images.length - newProducts.length);
+    const remainingSlots = Math.max(0, 7 - images.length - newProducts.length);
     const selectedFiles = files.slice(0, remainingSlots);
     
     const validItems = [];

@@ -13,6 +13,7 @@ dist-ssr
 migration/auth_users.csv
 migration/migrate-users.js
 *.local
+.env
 
 # Editor directories and files
 .vscode/*

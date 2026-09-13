@@ -1,7 +1,7 @@
 export default function AddProductButton({products, showForm, remaining, handleAddItem}){
     return (
         <>
-        {products.length < 4 && !showForm && (
+        {products.length < 7 && !showForm && (
         <div className="flex flex-col gap-1.5">
           <p className="text-dark-100">
             You can add{" "}
@@ -13,7 +13,7 @@ export default function AddProductButton({products, showForm, remaining, handleA
             className="bg-primary text-white p-1.5 lg:p-2.5 text-sm rounded cursor-pointer"
             onClick={handleAddItem}            
           >
-            Add Item ({products.length}/4)
+            Add Item ({products.length}/7)
           </button>
         </div>
       )}
